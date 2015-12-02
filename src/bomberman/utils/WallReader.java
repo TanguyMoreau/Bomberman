@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class WallReader{
 
-        public static ArrayList<Wall> readFile(Board board,String filename){
+        public static ArrayList<Wall> readFile(Board board, String filename){
                 ArrayList<Wall> walls = new ArrayList<>();
                 try(BufferedReader br = new BufferedReader(new FileReader(filename))){
                         String line = br.readLine();
@@ -30,7 +30,7 @@ public class WallReader{
                                 String[] split = line.split(" ");
                                 int x = Integer.parseInt(split[0]), y = Integer.parseInt(split[1]), radius = Integer.parseInt(split[2]);
                                 Geometry aBody = new Geometry(x, y, radius);
-                                Wall aWall = new Wall(board,aBody);
+                                Wall aWall = new Wall(board, aBody);
                                 walls.add(aWall);
                                 line = br.readLine();
                         }

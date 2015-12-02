@@ -24,8 +24,8 @@ public class Explosion extends Indestructible{
                 this.blastRadius = blastRadius;
         }
 
-        public Explosion(Board board,Geometry body, double blastRadius){
-                super(board,body);
+        public Explosion(Board board, Geometry body, double blastRadius){
+                super(board, body);
                 this.blastRadius = blastRadius;
         }
 

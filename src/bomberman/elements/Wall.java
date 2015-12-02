@@ -14,8 +14,8 @@ import bomberman.elements.geometry.Geometry;
  */
 public class Wall extends Indestructible{
 
-        public Wall(Board board,Geometry body){
-                super(board,body);
+        public Wall(Board board, Geometry body){
+                super(board, body);
         }
 
 }

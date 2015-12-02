@@ -14,8 +14,8 @@ import bomberman.elements.geometry.Geometry;
  */
 public class BonusBomb extends Bonus{
 
-        public BonusBomb(Board board,Geometry body){
-                super(board,body);
+        public BonusBomb(Board board, Geometry body){
+                super(board, body);
         }
 
 }

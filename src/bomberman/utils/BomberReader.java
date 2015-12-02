@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class BomberReader{
 
-        public static ArrayList<Bomber> readFile(Board board,String filename){
+        public static ArrayList<Bomber> readFile(Board board, String filename){
                 ArrayList<Bomber> bombers = new ArrayList<>();
                 try(BufferedReader br = new BufferedReader(new FileReader(filename))){
                         String line = br.readLine();
@@ -33,7 +33,7 @@ public class BomberReader{
                                 int radius = Integer.parseInt(split[2]);
                                 int healthPoints = Integer.parseInt(split[3]);
                                 Geometry aBody = new Geometry(x, y, radius);
-                                Bomber aBomber = new Bomber(board,aBody, healthPoints);
+                                Bomber aBomber = new Bomber(board, aBody, healthPoints);
                                 bombers.add(aBomber);
                                 line = br.readLine();
                         }

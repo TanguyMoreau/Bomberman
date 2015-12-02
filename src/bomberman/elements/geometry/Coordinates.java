@@ -41,29 +41,29 @@ public class Coordinates{
                 this.x = 0;
                 this.y = 0;
         }
-        
+
         public Coordinates(ArrayList<Entity> blockingBodies){
                 //returns a midpoint of all blocking bodies
-                this.x=0;
-                this.y=0;
+                this.x = 0;
+                this.y = 0;
                 for(Entity e : blockingBodies){
-                        Coordinates c=e.getBody().getPosition();
-                        this.x=this.x+c.getX();
-                        this.y=this.y+c.getY();
+                        Coordinates c = e.getBody().getPosition();
+                        this.x = this.x + c.getX();
+                        this.y = this.y + c.getY();
                 }
                 try{
-                        double n=blockingBodies.size();
-                        this.x=this.x/n;
-                        this.y=this.y/n;
+                        double n = blockingBodies.size();
+                        this.x = this.x / n;
+                        this.y = this.y / n;
                 }
                 catch(ArithmeticException e){
                         e.printStackTrace();
                 }
         }
-        
+
         public void add(Coordinates coordinates){
-                this.x=this.x+coordinates.getX();
-                this.y=this.y+coordinates.getY();
+                this.x = this.x + coordinates.getX();
+                this.y = this.y + coordinates.getY();
         }
 
         @Override

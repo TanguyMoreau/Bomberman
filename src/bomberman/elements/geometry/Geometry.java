@@ -55,35 +55,35 @@ public class Geometry{
         public Geometry(){
                 this.position = new Coordinates();
                 this.radius = 0;
-                this.oldPosition = new Coordinates();
-                updateDirection();
+//                this.oldPosition = new Coordinates();
+//                updateDirection();
         }
-        
+
         public Geometry(double x, double y, double radius){
-                this.position=new Coordinates(x, y);
-                this.oldPosition=this.position;
-                this.radius=radius;
-                updateDirection();
+                this.position = new Coordinates(x, y);
+                this.oldPosition = this.position;
+//                this.radius=radius;
+//                updateDirection();
         }
 
         public Geometry(Coordinates position, double radius){
                 this.position = position;
                 this.radius = radius;
-                this.oldPosition = position;
-                updateDirection();
+//                this.oldPosition = position;
+//                updateDirection();
         }
-        
+
         public Geometry(ArrayList<Entity> blockingBodies){
-                this.position=new Coordinates(blockingBodies);
-                double r=0;
-                for(Entity e: blockingBodies){
-                        if(e.getBody().getRadius()>r){
-                                r=e.getBody().getRadius();
+                this.position = new Coordinates(blockingBodies);
+                double r = 0;
+                for(Entity e : blockingBodies){
+                        if(e.getBody().getRadius() > r){
+                                r = e.getBody().getRadius();
                         }
                 }
-                this.radius=r;
-                this.oldPosition=this.position;
-                updateDirection();
+                this.radius = r;
+//                this.oldPosition=this.position;
+//                updateDirection();
         }
 
         public static double distanceInfinity(Coordinates a, Coordinates b){
@@ -93,14 +93,14 @@ public class Geometry{
         public boolean isInBall(Geometry g){
                 return (distanceInfinity(g.getPosition(), this.position) <= this.radius);
         }
-        
+
         public boolean collideWith(Geometry g){
-                return(distanceInfinity(g.getPosition(), this.position)<=this.radius+g.getRadius());
+                return (distanceInfinity(g.getPosition(), this.position) <= this.radius + g.getRadius());
         }
 
-        public void updatePosition(Coordinates newPosition){
+        public void updatePosition(Coordinates vector){
                 this.oldPosition = this.position;
-                this.position = newPosition;
+                this.position.add(vector);
         }
 
         public void updateDirection(){
@@ -109,9 +109,24 @@ public class Geometry{
                 this.direction = new Coordinates(dX, dY);
         }
 
+        public void repel(Geometry centerOfMass){
+                double xBomber = this.getPosition().getX();
+                double yBomber = this.getPosition().getY();
+                double xBlock = centerOfMass.getPosition().getX();
+                double yBlock = centerOfMass.getPosition().getY();
+                double repelDistance = this.getRadius() + centerOfMass.getRadius() - Geometry.distanceInfinity(this.getPosition(), centerOfMass.getPosition());
+                Coordinates repelVector=new Coordinates(repelDistance * (xBomber - xBlock), repelDistance * (yBomber - yBlock));
+                this.position.add(repelVector);
+        }
+
+        private Coordinates repelVector(Entity center){
+                
+                return new Coordinates();
+        }
+
         @Override
         public String toString(){
                 return "Geometry{" + "position=" + position + ", radius=" + radius + ", oldPosition=" + oldPosition + ", direction=" + direction + '}';
         }
-        
+
 }

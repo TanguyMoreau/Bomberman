@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class BrickReader{
 
-        public static ArrayList<Brick> readFile(Board board,String filename){
+        public static ArrayList<Brick> readFile(Board board, String filename){
                 ArrayList<Brick> bricks = new ArrayList<>();
                 try(BufferedReader br = new BufferedReader(new FileReader(filename))){
                         String line = br.readLine();
@@ -30,7 +30,7 @@ public class BrickReader{
                                 String[] split = line.split(" ");
                                 int x = Integer.parseInt(split[0]), y = Integer.parseInt(split[1]), radius = Integer.parseInt(split[2]);
                                 Geometry aBody = new Geometry(x, y, radius);
-                                Brick aBrick = new Brick(board,aBody);
+                                Brick aBrick = new Brick(board, aBody);
                                 bricks.add(aBrick);
                                 line = br.readLine();
                         }

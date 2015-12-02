@@ -18,8 +18,8 @@ public class Bomb extends Indestructible{
         private double blastRadius;
         private Bomber owner;
 
-        public Bomb(Board board,Bomber owner){
-                super(board,owner.getBody());
+        public Bomb(Board board, Bomber owner){
+                super(board, owner.getBody());
                 this.blastRadius = owner.getBlastRadius();
                 this.owner = owner;
                 this.countdown = 5;

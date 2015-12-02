@@ -14,8 +14,8 @@ import bomberman.elements.geometry.Geometry;
  */
 public abstract class Indestructible extends Entity{
 
-        public Indestructible(Board board,Geometry body){
-                super(board,body);
+        public Indestructible(Board board, Geometry body){
+                super(board, body);
         }
 
 }

@@ -17,9 +17,9 @@ public abstract class Entity{
 
         protected Board board;
         protected Geometry body;
-        
-        public Entity(Board board,Geometry body){
-                this.board=board;
+
+        public Entity(Board board, Geometry body){
+                this.board = board;
                 this.body = body;
         }
 
@@ -38,7 +38,7 @@ public abstract class Entity{
         public void setBody(Geometry body){
                 this.body = body;
         }
-        
+
         @Override
         public String toString(){
                 return "Entity{" + "body=" + body + '}';

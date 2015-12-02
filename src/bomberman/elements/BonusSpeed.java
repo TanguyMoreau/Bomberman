@@ -14,8 +14,8 @@ import bomberman.elements.geometry.Geometry;
  */
 public class BonusSpeed extends Bonus{
 
-        public BonusSpeed(Board board,Geometry body){
-                super(board,body);
+        public BonusSpeed(Board board, Geometry body){
+                super(board, body);
         }
 
 }

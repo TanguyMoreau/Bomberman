@@ -16,13 +16,13 @@ public abstract class Destructible extends Entity{
 
         private int healthPoints;
 
-        public Destructible(Board board,Geometry body, int healthPoints){
-                super(board,body);
+        public Destructible(Board board, Geometry body, int healthPoints){
+                super(board, body);
                 this.healthPoints = healthPoints;
         }
-        
+
         public void die(){
-                
+
         }
 
         public int getHealthPoints(){
@@ -32,7 +32,5 @@ public abstract class Destructible extends Entity{
         public void setHealthPoints(int healthPoints){
                 this.healthPoints = healthPoints;
         }
-
-      
 
 }

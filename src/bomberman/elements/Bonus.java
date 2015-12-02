@@ -14,8 +14,8 @@ import bomberman.elements.geometry.Geometry;
  */
 public abstract class Bonus extends Destructible{
 
-        public Bonus(Board board,Geometry body){
-                super(board,body, 1);
+        public Bonus(Board board, Geometry body){
+                super(board, body, 1);
         }
 
 }

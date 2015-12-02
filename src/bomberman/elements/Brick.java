@@ -14,8 +14,8 @@ import bomberman.elements.geometry.Geometry;
  */
 public class Brick extends Destructible{
 
-        public Brick(Board board,Geometry body){
-                super(board,body, 1);
+        public Brick(Board board, Geometry body){
+                super(board, body, 1);
         }
 
 }

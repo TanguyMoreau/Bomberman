@@ -27,9 +27,9 @@ public class Board{
         private HashSet<Explosion> explosions;
 
         public Board(String brickFile, String bomberFile, String wallFile){
-                bombers = BomberReader.readFile(this,bomberFile);
-                bricks = BrickReader.readFile(this,brickFile);
-                walls = WallReader.readFile(this,wallFile);
+                bombers = BomberReader.readFile(this, bomberFile);
+                bricks = BrickReader.readFile(this, brickFile);
+                walls = WallReader.readFile(this, wallFile);
 //                bombers=new ArrayList<>();
 //                bricks=new ArrayList<>();
 //                walls=new ArrayList<>();
@@ -37,18 +37,18 @@ public class Board{
                 bonuses = new ArrayList<>();
                 explosions = new HashSet<>();
         }
-        
-                public Board(){
-                bombers=new ArrayList<>();
-                bricks=new ArrayList<>();
-                walls=new ArrayList<>();
+
+        public Board(){
+                bombers = new ArrayList<>();
+                bricks = new ArrayList<>();
+                walls = new ArrayList<>();
                 bombs = new HashSet<>();
                 bonuses = new ArrayList<>();
                 explosions = new HashSet<>();
         }
-        
+
         public void run(){
-                while(bombers.size()>1){
+                while(bombers.size() > 1){
                         for(Bomber aBomber : bombers){
                                 aBomber.move(new Coordinates(1, 1));
                         }
@@ -107,7 +107,7 @@ public class Board{
 
         public void setExplosions(HashSet<Explosion> explosions){
                 this.explosions = explosions;
-        }      
+        }
 
         @Override
         public String toString(){
