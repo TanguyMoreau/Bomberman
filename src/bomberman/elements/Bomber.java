@@ -81,7 +81,7 @@ public class Bomber extends Destructible{
                         this.body.repel(centerOfMass);
                         if(this.body.collideWith(centerOfMass)){
                                 this.body.setPosition(this.body.getOldPosition());
-                                this.move(new Coordinates(vector.getX()/2, vector.getY()/2));
+                                this.move(new Coordinates(-vector.getX() / 2, -vector.getY() / 2));
                         }
                 }
 

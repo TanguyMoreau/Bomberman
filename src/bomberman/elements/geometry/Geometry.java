@@ -55,22 +55,17 @@ public class Geometry{
         public Geometry(){
                 this.position = new Coordinates();
                 this.radius = 0;
-//                this.oldPosition = new Coordinates();
-//                updateDirection();
         }
 
         public Geometry(double x, double y, double radius){
                 this.position = new Coordinates(x, y);
                 this.oldPosition = this.position;
-//                this.radius=radius;
-//                updateDirection();
+                this.radius = radius;
         }
 
         public Geometry(Coordinates position, double radius){
                 this.position = position;
                 this.radius = radius;
-//                this.oldPosition = position;
-//                updateDirection();
         }
 
         public Geometry(ArrayList<Entity> blockingBodies){
@@ -82,8 +77,6 @@ public class Geometry{
                         }
                 }
                 this.radius = r;
-//                this.oldPosition=this.position;
-//                updateDirection();
         }
 
         public static double distanceInfinity(Coordinates a, Coordinates b){
@@ -100,12 +93,15 @@ public class Geometry{
 
         public void updatePosition(Coordinates vector){
                 this.oldPosition = this.position;
-                this.position.add(vector);
+                Coordinates newPosition = new Coordinates(this.position.getX(), this.position.getY());
+                newPosition.add(vector);
+                this.setPosition(newPosition);
+                updateDirection();
         }
 
         public void updateDirection(){
                 double dX = (position.getX() - oldPosition.getX());
-                double dY = (position.getX() - oldPosition.getY());
+                double dY = (position.getY() - oldPosition.getY());
                 this.direction = new Coordinates(dX, dY);
         }
 
@@ -115,13 +111,8 @@ public class Geometry{
                 double xBlock = centerOfMass.getPosition().getX();
                 double yBlock = centerOfMass.getPosition().getY();
                 double repelDistance = this.getRadius() + centerOfMass.getRadius() - Geometry.distanceInfinity(this.getPosition(), centerOfMass.getPosition());
-                Coordinates repelVector=new Coordinates(repelDistance * (xBomber - xBlock), repelDistance * (yBomber - yBlock));
+                Coordinates repelVector = new Coordinates(repelDistance * (xBomber - xBlock), repelDistance * (yBomber - yBlock));
                 this.position.add(repelVector);
-        }
-
-        private Coordinates repelVector(Entity center){
-                
-                return new Coordinates();
         }
 
         @Override
