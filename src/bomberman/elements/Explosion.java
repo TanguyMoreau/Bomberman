@@ -13,20 +13,23 @@ import bomberman.elements.geometry.Geometry;
  * @author grochette
  */
 public class Explosion extends Indestructible{
-
-        private double blastRadius;
-
-        public double getBlastRadius(){
-                return blastRadius;
-        }
-
-        public void setBlastRadius(double blastRadius){
-                this.blastRadius = blastRadius;
-        }
-
-        public Explosion(Board board, Geometry body, double blastRadius){
+        
+        public Explosion(Board board, Geometry body){
                 super(board, body);
-                this.blastRadius = blastRadius;
+        }
+
+        public void destroy(){
+                for(Bomber aBomber : this.getBoard().getBombers()){
+                        if(this.getBody().isInBall(aBomber.getBody())){
+                                aBomber.loseHealth();
+                        }
+                }
+                for(Brick aBrick : this.getBoard().getBricks()){
+                        if(this.getBody().isInBall(aBrick.getBody())){
+                                aBrick.loseHealth();
+                        }
+                }
+                this.getBoard().getExplosions().remove(this);
         }
 
 }

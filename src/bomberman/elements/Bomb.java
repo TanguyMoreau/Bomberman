@@ -50,9 +50,9 @@ public class Bomb extends Indestructible{
         }
 
         private void explode(){
-                Explosion anExplosion = new Explosion(board, body, blastRadius);
-                board.getBombs().remove(this);
-                board.getExplosions().add(anExplosion);
+                Explosion anExplosion = new Explosion(this.getBoard(), new Geometry(this.getBody().getPosition(), blastRadius));
+                this.getBoard().getBombs().remove(this);
+                this.getBoard().getExplosions().add(anExplosion);
         }
 
         public void tick(){

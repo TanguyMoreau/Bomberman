@@ -9,9 +9,6 @@ import bomberman.Board;
 import bomberman.elements.geometry.Coordinates;
 import bomberman.elements.geometry.Geometry;
 import java.util.ArrayList;
-import java.util.Objects;
-import jdk.nashorn.internal.codegen.CompilerConstants;
-
 /**
  *
  * @author grochette
@@ -68,20 +65,20 @@ public class Bomber extends Destructible{
         public void plantBomb(){
                 if(getPlantedBombs() < getMaxBombs()){
                         this.plantedBombs = this.plantedBombs + 1;
-                        Bomb aBomb = new Bomb(board, this);
-                        board.getBombs().add(aBomb);
+                        Bomb aBomb = new Bomb(this.getBoard(), this);
+                        this.getBoard().getBombs().add(aBomb);
                 }
         }
 
         public void move(Coordinates vector){
-                this.body.updatePosition(vector);
+                this.getBody().updatePosition(vector);
                 ArrayList<Entity> blockingBodies = findBlockingBodies();
                 if(!blockingBodies.isEmpty()){
                         Geometry centerOfMass = new Geometry(blockingBodies);
-                        this.body.repel(centerOfMass);
-                        if(this.body.collideWith(centerOfMass)){
-                                this.body.setPosition(this.body.getOldPosition());
-                                this.move(new Coordinates(-vector.getX() / 2, -vector.getY() / 2));
+                        this.getBody().repel(centerOfMass);
+                        if(this.getBody().collideWith(centerOfMass)){
+                                this.getBody().setPosition(this.getBody().getOldPosition());
+                                this.move(new Coordinates(vector.getX() / 2, vector.getY() / 2));
                         }
                 }
 
@@ -90,34 +87,38 @@ public class Bomber extends Destructible{
         private ArrayList<Entity> findBlockingBodies(){
                 Geometry bomberBody = this.getBody();
                 ArrayList<Entity> blockingBodies = new ArrayList<>();
-                for(Wall aWall : board.getWalls()){
+                for(Wall aWall : this.getBoard().getWalls()){
                         if(bomberBody.collideWith(aWall.getBody())){
                                 blockingBodies.add(aWall);
                         }
                 }
-                for(Brick aBrick : board.getBricks()){
+                for(Brick aBrick : this.getBoard().getBricks()){
                         if(bomberBody.collideWith(aBrick.getBody())){
                                 blockingBodies.add(aBrick);
                         }
                 }
-                for(Bomber aBomber : board.getBombers()){
+                for(Bomber aBomber : this.getBoard().getBombers()){
                         if(!this.equals(aBomber)){
                                 if(bomberBody.collideWith(aBomber.getBody())){
                                         blockingBodies.add(aBomber);
                                 }
                         }
                 }
-                for(Bomb aBomb : board.getBombs()){
+                for(Bomb aBomb : this.getBoard().getBombs()){
                         if(bomberBody.collideWith(aBomb.getBody())){
                                 blockingBodies.add(aBomb);
                         }
                 }
                 return blockingBodies;
         }
+        
+        @Override
+        public void die(){
+                this.getBoard().getBombers().remove(this);
+        }
 
         @Override
         public String toString(){
                 return "Bomber{" + getBody() + "plantedBombs=" + plantedBombs + ", maxBombs=" + maxBombs + ", blastRadius=" + blastRadius + ", speed=" + speed + '}';
         }
-
 }

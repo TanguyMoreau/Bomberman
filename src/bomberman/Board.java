@@ -21,7 +21,6 @@ public class Board{
 
         private ArrayList<Bomber> bombers;
         private HashSet<Bomb> bombs;
-        private ArrayList<Bonus> bonuses;
         private ArrayList<Brick> bricks;
         private ArrayList<Wall> walls;
         private HashSet<Explosion> explosions;
@@ -34,7 +33,6 @@ public class Board{
 //                bricks=new ArrayList<>();
 //                walls=new ArrayList<>();
                 bombs = new HashSet<>();
-                bonuses = new ArrayList<>();
                 explosions = new HashSet<>();
         }
 
@@ -43,7 +41,6 @@ public class Board{
                 bricks = new ArrayList<>();
                 walls = new ArrayList<>();
                 bombs = new HashSet<>();
-                bonuses = new ArrayList<>();
                 explosions = new HashSet<>();
         }
 
@@ -56,7 +53,7 @@ public class Board{
                                 aBomb.tick();
                         }
                         for(Explosion anExplosion : explosions){
-                                //
+                                anExplosion.destroy();
                         }
                 }
         }
@@ -75,14 +72,6 @@ public class Board{
 
         public void setBombs(HashSet<Bomb> bombs){
                 this.bombs = bombs;
-        }
-
-        public ArrayList<Bonus> getBonuses(){
-                return bonuses;
-        }
-
-        public void setBonuses(ArrayList<Bonus> bonuses){
-                this.bonuses = bonuses;
         }
 
         public ArrayList<Brick> getBricks(){
@@ -111,7 +100,7 @@ public class Board{
 
         @Override
         public String toString(){
-                return "Board{" + "bombers=" + bombers + ", bombs=" + bombs + ", bonuses=" + bonuses + ", bricks=" + bricks + ", walls=" + walls + '}';
+                return "Board{" + "bombers=" + bombers + ", bombs=" + bombs + ", bricks=" + bricks + ", walls=" + walls + '}';
         }
 
 }

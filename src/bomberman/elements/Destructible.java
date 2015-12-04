@@ -20,10 +20,15 @@ public abstract class Destructible extends Entity{
                 super(board, body);
                 this.healthPoints = healthPoints;
         }
-
-        public void die(){
-
+        
+        public void loseHealth(){
+                this.healthPoints--;
+                if(this.healthPoints==0){
+                        this.die();
+                }
         }
+        
+        public abstract void die();
 
         public int getHealthPoints(){
                 return healthPoints;

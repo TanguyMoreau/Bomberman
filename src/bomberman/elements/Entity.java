@@ -10,13 +10,12 @@ import bomberman.elements.geometry.Geometry;
 import java.util.Objects;
 
 /**
- *
  * @author grochette
  */
 public abstract class Entity{
 
-        protected Board board;
-        protected Geometry body;
+        private Board board;
+        private Geometry body;
 
         public Entity(Board board, Geometry body){
                 this.board = board;
