@@ -122,18 +122,18 @@ public class Bomber extends Destructible{
 
         @Override
         public String toString(){
-                return "Bomber{" + getBody() + "plantedBombs=" + plantedBombs + ", maxBombs=" + maxBombs + ", blastRadius=" + blastRadius + ", speed=" + speed + '}';
+                return super.toString();
         }
-        
+
         public BomberLite getBomberLite(){
                 return new BomberLite(this.getBody().getGeometryLite(), this.getHealthPoints());
         }
-        
+
         public void act(Action action){
                 this.move(action.getCoordinates());
                 if(action.isDropTheBomb()){
                         this.plantBomb();
                 }
-                
+
         }
 }

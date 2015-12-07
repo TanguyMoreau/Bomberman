@@ -118,9 +118,9 @@ public class Geometry{
 
         @Override
         public String toString(){
-                return "Geometry{" + "position=" + position + ", radius=" + radius + ", oldPosition=" + oldPosition + ", direction=" + direction + '}';
+                return "Geometry{" + "position=" + position + ", radius=" + radius /*+ ", oldPosition=" + oldPosition + ", direction=" + direction + '}'*/;
         }
-        
+
         public GeometryLite getGeometryLite(){
                 return new GeometryLite(this.position, this.radius);
         }

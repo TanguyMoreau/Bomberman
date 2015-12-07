@@ -17,5 +17,5 @@ public class BombLite extends IndestructibleLite{
         public BombLite(GeometryLite body){
                 super(body);
         }
-        
+
 }

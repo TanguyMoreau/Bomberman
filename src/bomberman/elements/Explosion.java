@@ -32,7 +32,7 @@ public class Explosion extends Indestructible{
                 }
                 this.getBoard().getExplosions().remove(this);
         }
-        
+
         public ExplosionLite getExplosionLite(){
                 return new ExplosionLite(this.getBody().getGeometryLite());
         }

@@ -40,6 +40,6 @@ public abstract class Entity{
 
         @Override
         public String toString(){
-                return "Entity{" + "body=" + body + '}';
+                return "body=" + body;
         }
 }

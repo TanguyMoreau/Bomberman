@@ -17,5 +17,5 @@ public class IndestructibleLite extends EntityLite{
         public IndestructibleLite(GeometryLite body){
                 super(body);
         }
-        
+
 }

@@ -62,7 +62,7 @@ public class Bomb extends Indestructible{
                         explode();
                 }
         }
-        
+
         public BombLite getBombLite(){
                 return new BombLite(this.getBody().getGeometryLite());
         }

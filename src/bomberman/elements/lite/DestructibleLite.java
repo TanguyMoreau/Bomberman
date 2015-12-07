@@ -16,11 +16,11 @@ public class DestructibleLite extends EntityLite{
 
         private int healthPoints;
 
-                public DestructibleLite(GeometryLite body, int healthPoints){
+        public DestructibleLite(GeometryLite body, int healthPoints){
                 super(body);
                 this.healthPoints = healthPoints;
         }
-                
+
         public int getHealthPoints(){
                 return healthPoints;
         }

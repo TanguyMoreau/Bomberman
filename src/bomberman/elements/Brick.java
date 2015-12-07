@@ -23,7 +23,7 @@ public class Brick extends Destructible{
         public void die(){
                 this.getBoard().getBricks().remove(this);
         }
-        
+
         public BrickLite getBrickLite(){
                 return new BrickLite(this.getBody().getGeometryLite(), this.getHealthPoints());
         }

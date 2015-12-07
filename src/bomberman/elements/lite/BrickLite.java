@@ -16,5 +16,5 @@ public class BrickLite extends DestructibleLite{
         public BrickLite(GeometryLite body, int healthPoints){
                 super(body, healthPoints);
         }
-        
+
 }

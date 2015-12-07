@@ -18,7 +18,7 @@ public class Wall extends Indestructible{
         public Wall(Board board, Geometry body){
                 super(board, body);
         }
-        
+
         public WallLite getWallLite(){
                 return new WallLite(this.getBody().getGeometryLite());
         }

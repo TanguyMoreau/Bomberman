@@ -17,5 +17,5 @@ public class WallLite extends IndestructibleLite{
         public WallLite(GeometryLite body){
                 super(body);
         }
-        
+
 }

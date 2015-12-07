@@ -8,12 +8,15 @@ package bomberman;
 import bomberman.elements.*;
 import bomberman.elements.geometry.Coordinates;
 import bomberman.elements.lite.EntityLite;
+import bomberman.elements.motion.Action;
 import bomberman.utils.BomberReader;
 import bomberman.utils.BrickReader;
 import bomberman.utils.WallReader;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +29,7 @@ public class Board{
         private ArrayList<Brick> bricks;
         private ArrayList<Wall> walls;
         private HashSet<Explosion> explosions;
+        private Random r = new Random();
 
         public Board(){
                 this.bombers = new ArrayList<>();
@@ -42,15 +46,25 @@ public class Board{
         }
 
         public void run(){
-                while(bombers.size() > 1){
+                while(bombers.size() >= 1){
+                        
+                        System.out.println(this.bombers);
+                        
                         for(Bomber aBomber : bombers){
-                                aBomber.act(null/* */);
+                                aBomber.act(new Action(new Coordinates(1 - 2 * r.nextDouble(), 1 - 2 * r.nextDouble()), false));
                         }
                         for(Bomb aBomb : bombs){
                                 aBomb.tick();
                         }
                         for(Explosion anExplosion : explosions){
                                 anExplosion.destroy();
+                        }
+                        
+                        try{
+                                Thread.sleep(1000);
+                        }
+                        catch(InterruptedException ex){
+                                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
                         }
                 }
         }
@@ -94,9 +108,9 @@ public class Board{
         public void setExplosions(HashSet<Explosion> explosions){
                 this.explosions = explosions;
         }
-        
+
         public ArrayList<EntityLite> prepareList(){
-                ArrayList<EntityLite> l=new ArrayList<>();
+                ArrayList<EntityLite> l = new ArrayList<>();
                 for(Bomber b : this.bombers){
                         l.add(b.getBomberLite());
                 }
@@ -113,11 +127,11 @@ public class Board{
                         l.add(w.getWallLite());
                 }
                 return l;
-        }                
+        }
 
         @Override
         public String toString(){
-                return "Board{" + "bombers=" + bombers + ", bombs=" + bombs + ", bricks=" + bricks + ", walls=" + walls + '}';
+                return "bombers=" + bombers + "\nbombs=" + bombs + "\nbricks=" + bricks + "\nwalls=" + walls;
         }
 
 }

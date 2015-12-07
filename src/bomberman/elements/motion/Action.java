@@ -12,6 +12,7 @@ import bomberman.elements.geometry.Coordinates;
  * @author grochette
  */
 public class Action{
+
         private Coordinates coordinates;
         private boolean dropTheBomb;
 

@@ -16,5 +16,5 @@ public class BomberLite extends DestructibleLite{
         public BomberLite(GeometryLite body, int healthPoints){
                 super(body, healthPoints);
         }
-        
+
 }

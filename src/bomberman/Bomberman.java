@@ -11,6 +11,7 @@ import bomberman.elements.geometry.Coordinates;
 import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.EntityLite;
 import bomberman.elements.motion.Action;
+import bomberman.utils.WallReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,25 +27,13 @@ public class Bomberman{
          */
         public static void main(String[] args){
                 Board board = new Board();
-                Bomber a = new Bomber(board, new Geometry(1, 0, 0.3), 3);
-                Bomber b = new Bomber(board, new Geometry(0, 1, 0.3), 3);
-                Wall w = new Wall(board, new Geometry(0, 0, 0.1));
+                board.setWalls(WallReader.readFile(board, "resources/Walls.txt"));
+                //System.out.println(board.getWalls());
+                Bomber a = new Bomber(board, new Geometry(48, 48, 5), 3);
+                //Bomber b = new Bomber(board, new Geometry(0, 1, 0.3), 3);
                 board.getBombers().add(a);
-                board.getBombers().add(b);
-                board.getWalls().add(w);
-                for(int i = 0; i < 10; i++){
-                        ArrayList<EntityLite> kk=  board.prepareList();
-                        try{
-                                Thread.sleep(1000);
-                        }
-                        catch(InterruptedException ex){
-                                Logger.getLogger(Bomberman.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        a.act(new Action(new Coordinates(-0.1, 0), false));
-                        b.act(new Action(new Coordinates(0, -0.1), false));
-                        System.out.println(a);
-                        System.out.println(b);
-                }
+                //board.getBombers().add(b);
+                board.run();
         }
 
 }
