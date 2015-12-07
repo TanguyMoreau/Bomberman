@@ -32,7 +32,7 @@ public class Board{
                 this.bombs = new HashSet<>();
                 this.explosions = new HashSet<>();
         }
-        
+
         public void build(String bomberFile, String brickFile, String wallFile){
                 this.bombers = BomberReader.readFile(this, bomberFile);
                 this.bricks = BrickReader.readFile(this, brickFile);

@@ -13,7 +13,7 @@ import bomberman.elements.geometry.Geometry;
  * @author grochette
  */
 public class Explosion extends Indestructible{
-        
+
         public Explosion(Board board, Geometry body){
                 super(board, body);
         }

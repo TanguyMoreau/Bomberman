@@ -5,10 +5,17 @@
  */
 package bomberman.elements.lite;
 
+import bomberman.elements.geometry.Geometry;
+import bomberman.elements.lite.geometry.GeometryLite;
+
 /**
  *
  * @author grochette
  */
-public class Entity{
+public class WallLite extends IndestructibleLite{
+
+        public WallLite(GeometryLite body){
+                super(body);
+        }
         
 }

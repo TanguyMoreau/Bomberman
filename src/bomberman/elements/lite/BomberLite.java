@@ -5,10 +5,16 @@
  */
 package bomberman.elements.lite;
 
+import bomberman.elements.lite.geometry.GeometryLite;
+
 /**
  *
  * @author grochette
  */
-public class Explosion{
+public class BomberLite extends DestructibleLite{
+
+        public BomberLite(GeometryLite body, int healthPoints){
+                super(body, healthPoints);
+        }
         
 }

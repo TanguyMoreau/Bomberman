@@ -9,6 +9,7 @@ import bomberman.Board;
 import bomberman.elements.geometry.Coordinates;
 import bomberman.elements.geometry.Geometry;
 import java.util.ArrayList;
+
 /**
  *
  * @author grochette
@@ -111,7 +112,7 @@ public class Bomber extends Destructible{
                 }
                 return blockingBodies;
         }
-        
+
         @Override
         public void die(){
                 this.getBoard().getBombers().remove(this);

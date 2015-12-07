@@ -37,7 +37,7 @@ public class Bomberman{
                                 Logger.getLogger(Bomberman.class.getName()).log(Level.SEVERE, null, ex);
                         }
                         a.move(new Coordinates(-0.1, 0));
-                        b.move(new Coordinates(0,-0.1));
+                        b.move(new Coordinates(0, -0.1));
                         System.out.println(a);
                         System.out.println(b);
                 }

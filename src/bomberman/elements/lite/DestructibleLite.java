@@ -3,33 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.elements;
+package bomberman.elements.lite;
 
-import bomberman.Board;
 import bomberman.elements.geometry.Geometry;
+import bomberman.elements.lite.geometry.GeometryLite;
 
 /**
  *
  * @author grochette
  */
-public abstract class Destructible extends Entity{
+public class DestructibleLite extends EntityLite{
 
         private int healthPoints;
 
-        public Destructible(Board board, Geometry body, int healthPoints){
-                super(board, body);
+                public DestructibleLite(GeometryLite body, int healthPoints){
+                super(body);
                 this.healthPoints = healthPoints;
         }
-
-        public void loseHealth(){
-                this.healthPoints--;
-                if(this.healthPoints == 0){
-                        this.die();
-                }
-        }
-
-        public abstract void die();
-
+                
         public int getHealthPoints(){
                 return healthPoints;
         }
