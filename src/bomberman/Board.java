@@ -44,7 +44,7 @@ public class Board{
         public void run(){
                 while(bombers.size() > 1){
                         for(Bomber aBomber : bombers){
-                                aBomber.move(new Coordinates(1, 1));
+                                aBomber.act(null/* */);
                         }
                         for(Bomb aBomb : bombs){
                                 aBomb.tick();
