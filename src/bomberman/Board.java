@@ -25,23 +25,18 @@ public class Board{
         private ArrayList<Wall> walls;
         private HashSet<Explosion> explosions;
 
-        public Board(String brickFile, String bomberFile, String wallFile){
-                bombers = BomberReader.readFile(this, bomberFile);
-                bricks = BrickReader.readFile(this, brickFile);
-                walls = WallReader.readFile(this, wallFile);
-//                bombers=new ArrayList<>();
-//                bricks=new ArrayList<>();
-//                walls=new ArrayList<>();
-                bombs = new HashSet<>();
-                explosions = new HashSet<>();
-        }
-
         public Board(){
-                bombers = new ArrayList<>();
-                bricks = new ArrayList<>();
-                walls = new ArrayList<>();
-                bombs = new HashSet<>();
-                explosions = new HashSet<>();
+                this.bombers = new ArrayList<>();
+                this.bricks = new ArrayList<>();
+                this.walls = new ArrayList<>();
+                this.bombs = new HashSet<>();
+                this.explosions = new HashSet<>();
+        }
+        
+        public void build(String bomberFile, String brickFile, String wallFile){
+                this.bombers = BomberReader.readFile(this, bomberFile);
+                this.bricks = BrickReader.readFile(this, brickFile);
+                this.walls = WallReader.readFile(this, wallFile);
         }
 
         public void run(){

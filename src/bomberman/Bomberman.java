@@ -30,6 +30,12 @@ public class Bomberman{
                 board.getBombers().add(b);
                 board.getWalls().add(w);
                 for(int i = 0; i < 10; i++){
+                        try{
+                                Thread.sleep(1000);
+                        }
+                        catch(InterruptedException ex){
+                                Logger.getLogger(Bomberman.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                         a.move(new Coordinates(-0.1, 0));
                         b.move(new Coordinates(0,-0.1));
                         System.out.println(a);
