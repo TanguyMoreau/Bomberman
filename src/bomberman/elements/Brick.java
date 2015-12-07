@@ -7,6 +7,7 @@ package bomberman.elements;
 
 import bomberman.Board;
 import bomberman.elements.geometry.Geometry;
+import bomberman.elements.lite.BrickLite;
 
 /**
  *
@@ -21,6 +22,10 @@ public class Brick extends Destructible{
         @Override
         public void die(){
                 this.getBoard().getBricks().remove(this);
+        }
+        
+        public BrickLite getBrickLite(){
+                return new BrickLite(this.getBody().getGeometryLite(), this.getHealthPoints());
         }
 
 }

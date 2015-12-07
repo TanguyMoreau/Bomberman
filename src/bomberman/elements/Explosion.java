@@ -7,6 +7,7 @@ package bomberman.elements;
 
 import bomberman.Board;
 import bomberman.elements.geometry.Geometry;
+import bomberman.elements.lite.ExplosionLite;
 
 /**
  *
@@ -30,6 +31,10 @@ public class Explosion extends Indestructible{
                         }
                 }
                 this.getBoard().getExplosions().remove(this);
+        }
+        
+        public ExplosionLite getExplosionLite(){
+                return new ExplosionLite(this.getBody().getGeometryLite());
         }
 
 }

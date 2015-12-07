@@ -8,6 +8,7 @@ package bomberman.elements;
 import bomberman.Board;
 import bomberman.elements.geometry.Coordinates;
 import bomberman.elements.geometry.Geometry;
+import bomberman.elements.lite.BomberLite;
 import java.util.ArrayList;
 
 /**
@@ -121,5 +122,9 @@ public class Bomber extends Destructible{
         @Override
         public String toString(){
                 return "Bomber{" + getBody() + "plantedBombs=" + plantedBombs + ", maxBombs=" + maxBombs + ", blastRadius=" + blastRadius + ", speed=" + speed + '}';
+        }
+        
+        public BomberLite getBomberLite(){
+                return new BomberLite(this.getBody().getGeometryLite(), this.getHealthPoints());
         }
 }

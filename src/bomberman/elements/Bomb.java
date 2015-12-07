@@ -7,6 +7,7 @@ package bomberman.elements;
 
 import bomberman.Board;
 import bomberman.elements.geometry.Geometry;
+import bomberman.elements.lite.BombLite;
 
 /**
  *
@@ -60,5 +61,9 @@ public class Bomb extends Indestructible{
                 if(countdown == 0){
                         explode();
                 }
+        }
+        
+        public BombLite getBombLite(){
+                return new BombLite(this.getBody().getGeometryLite());
         }
 }

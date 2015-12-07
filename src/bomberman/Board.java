@@ -7,11 +7,13 @@ package bomberman;
 
 import bomberman.elements.*;
 import bomberman.elements.geometry.Coordinates;
+import bomberman.elements.lite.EntityLite;
 import bomberman.utils.BomberReader;
 import bomberman.utils.BrickReader;
 import bomberman.utils.WallReader;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  *
@@ -92,6 +94,26 @@ public class Board{
         public void setExplosions(HashSet<Explosion> explosions){
                 this.explosions = explosions;
         }
+        
+        public ArrayList<EntityLite> prepareList(){
+                ArrayList<EntityLite> l=new ArrayList<>();
+                for(Bomber b : this.bombers){
+                        l.add(b.getBomberLite());
+                }
+                for(Bomb b : this.bombs){
+                        l.add(b.getBombLite());
+                }
+                for(Brick b : this.bricks){
+                        l.add(b.getBrickLite());
+                }
+                for(Explosion e : this.explosions){
+                        l.add(e.getExplosionLite());
+                }
+                for(Wall w : this.walls){
+                        l.add(w.getWallLite());
+                }
+                return l;
+        }                
 
         @Override
         public String toString(){
