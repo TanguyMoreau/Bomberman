@@ -9,6 +9,7 @@ import bomberman.Board;
 import bomberman.elements.geometry.Coordinates;
 import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.BomberLite;
+import bomberman.elements.motion.Action;
 import java.util.ArrayList;
 
 /**
@@ -126,5 +127,13 @@ public class Bomber extends Destructible{
         
         public BomberLite getBomberLite(){
                 return new BomberLite(this.getBody().getGeometryLite(), this.getHealthPoints());
+        }
+        
+        public void act(Action action){
+                this.move(action.getCoordinates());
+                if(action.isDropTheBomb()){
+                        this.plantBomb();
+                }
+                
         }
 }
