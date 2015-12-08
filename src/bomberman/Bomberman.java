@@ -27,9 +27,9 @@ public class Bomberman{
          */
         public static void main(String[] args){
                 Board board = new Board();
-                board.setWalls(WallReader.readFile(board, "resources/Walls.txt"));
+                board.setWalls(WallReader.defaultFile(board));
                 //System.out.println(board.getWalls());
-                Bomber a = new Bomber(board, new Geometry(48, 48, 5), 3);
+                Bomber a = new Bomber(board, new Geometry(40, 40, 5), 3);
                 //Bomber b = new Bomber(board, new Geometry(0, 1, 0.3), 3);
                 board.getBombers().add(a);
                 //board.getBombers().add(b);

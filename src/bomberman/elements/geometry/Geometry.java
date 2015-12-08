@@ -112,7 +112,7 @@ public class Geometry{
                 double xBlock = centerOfMass.getPosition().getX();
                 double yBlock = centerOfMass.getPosition().getY();
                 double repelDistance = this.getRadius() + centerOfMass.getRadius() - Geometry.distanceInfinity(this.getPosition(), centerOfMass.getPosition());
-                Coordinates repelVector = new Coordinates(repelDistance * (xBomber - xBlock), repelDistance * (yBomber - yBlock));
+                Coordinates repelVector = new Coordinates(repelDistance/8 * (xBomber - xBlock), repelDistance /8* (yBomber - yBlock));
                 this.position.add(repelVector);
         }
 

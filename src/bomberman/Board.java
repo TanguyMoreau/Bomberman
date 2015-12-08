@@ -55,7 +55,7 @@ public class Board{
                         System.out.println(this.bombers);
 
                         for(Bomber aBomber : bombers){
-                                aBomber.act(new Action(new Coordinates(1 - 2 * r.nextDouble(), 1 - 2 * r.nextDouble()), false));
+                                aBomber.act(new Action(new Coordinates(3*(1 - 2 *r.nextDouble()),3*(1 - 2 * r.nextDouble())), false));
                         }
                         for(Bomb aBomb : bombs){
                                 aBomb.tick();
