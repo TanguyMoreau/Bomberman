@@ -6,13 +6,14 @@
 package bomberman.elements.geometry;
 
 import bomberman.elements.Entity;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author grochette
  */
-public class Coordinates{
+public class Coordinates implements Serializable{
 
         private double x, y;
 

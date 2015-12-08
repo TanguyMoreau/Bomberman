@@ -6,12 +6,13 @@
 package bomberman.elements.motion;
 
 import bomberman.elements.geometry.Coordinates;
+import java.io.Serializable;
 
 /**
  *
  * @author grochette
  */
-public class Action{
+public class Action implements  Serializable{
 
         private Coordinates coordinates;
         private boolean dropTheBomb;
@@ -20,7 +21,7 @@ public class Action{
                 this.coordinates = coordinates;
                 this.dropTheBomb = dropTheBomb;
         }
-
+        
         public Coordinates getCoordinates(){
                 return coordinates;
         }
@@ -35,5 +36,10 @@ public class Action{
 
         public void setDropTheBomb(boolean dropTheBomb){
                 this.dropTheBomb = dropTheBomb;
+        }
+
+        @Override
+        public String toString(){
+                return "Action{" + "coordinates=" + coordinates + ", dropTheBomb=" + dropTheBomb + '}';
         }
 }
