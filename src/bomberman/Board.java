@@ -27,14 +27,14 @@ public class Board{
         private ArrayList<Bomber> bombers;
         private HashSet<Bomb> bombs;
         private ArrayList<Brick> bricks;
-        private ArrayList<Wall> walls;
+        private HashSet<Wall> walls;
         private HashSet<Explosion> explosions;
         private Random r = new Random();
 
         public Board(){
                 this.bombers = new ArrayList<>();
                 this.bricks = new ArrayList<>();
-                this.walls = new ArrayList<>();
+                this.walls = new HashSet<>();
                 this.bombs = new HashSet<>();
                 this.explosions = new HashSet<>();
         }
@@ -45,11 +45,15 @@ public class Board{
                 this.walls = WallReader.readFile(this, wallFile);
         }
 
+        public void buildDefault(){
+                //
+        }
+
         public void run(){
                 while(bombers.size() >= 1){
-                        
+
                         System.out.println(this.bombers);
-                        
+
                         for(Bomber aBomber : bombers){
                                 aBomber.act(new Action(new Coordinates(1 - 2 * r.nextDouble(), 1 - 2 * r.nextDouble()), false));
                         }
@@ -59,7 +63,7 @@ public class Board{
                         for(Explosion anExplosion : explosions){
                                 anExplosion.destroy();
                         }
-                        
+
                         try{
                                 Thread.sleep(1000);
                         }
@@ -93,11 +97,11 @@ public class Board{
                 this.bricks = bricks;
         }
 
-        public ArrayList<Wall> getWalls(){
+        public HashSet<Wall> getWalls(){
                 return walls;
         }
 
-        public void setWalls(ArrayList<Wall> walls){
+        public void setWalls(HashSet<Wall> walls){
                 this.walls = walls;
         }
 
@@ -109,7 +113,7 @@ public class Board{
                 this.explosions = explosions;
         }
 
-        public ArrayList<EntityLite> prepareList(){
+        public ArrayList<EntityLite> createListLite(){
                 ArrayList<EntityLite> l = new ArrayList<>();
                 for(Bomber b : this.bombers){
                         l.add(b.getBomberLite());

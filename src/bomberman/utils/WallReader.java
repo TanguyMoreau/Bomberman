@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,8 +23,8 @@ import java.util.logging.Logger;
  */
 public class WallReader{
 
-        public static ArrayList<Wall> readFile(Board board, String filename){
-                ArrayList<Wall> walls = new ArrayList<>();
+        public static HashSet<Wall> readFile(Board board, String filename){
+                HashSet<Wall> walls = new HashSet<>();
                 try(BufferedReader br = new BufferedReader(new FileReader(filename))){
                         String line = br.readLine();
                         while(line != null){
@@ -40,6 +41,18 @@ public class WallReader{
                 }
                 catch(IOException ex){
                         Logger.getLogger(WallReader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return walls;
+        }
+        
+        public static HashSet<Wall> defaultFile(Board board){
+                HashSet<Wall> walls = new HashSet<>();
+                int translate=16;
+                int side=32;
+                for(int i=0;i<15;i++){
+                        Geometry aBody= new Geometry(translate+i*side, translate, side);
+                        walls.add(new Wall(board,new Geometry(translate+i*side, translate, side)));
+                        walls.add(new Wall(board, aBody));
                 }
                 return walls;
         }
