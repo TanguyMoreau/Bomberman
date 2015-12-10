@@ -35,14 +35,16 @@ public class Board{
         private HashSet<Wall> walls;
         private HashSet<Explosion> explosions;
         private InterfaceReseauImpl myInterfaceImpl;
+        private final int numberOfPlayers;
 
-        public Board() throws RemoteException{
+        public Board(int numberOfPlayers) throws RemoteException{
                 this.bombers = new ArrayList<>();
                 this.bricks = new ArrayList<>();
                 this.walls = new HashSet<>();
                 this.bombs = new HashSet<>();
                 this.explosions = new HashSet<>();
                 this.myInterfaceImpl = new InterfaceReseauImpl();
+                this.numberOfPlayers=numberOfPlayers;
         }
 
         public void build(String bomberFile, String brickFile, String wallFile){
@@ -53,12 +55,25 @@ public class Board{
 
         public void buildDefault(){
                 walls=WallReader.defaultFile(this);
+                if(numberOfPlayers>0){
+                        bombers.add(new Bomber(this, new Geometry(48, 48, 10),3));
+                }
+                if(numberOfPlayers>1){
+                        bombers.add(new Bomber(this, new Geometry(434, 434, 10),3));
+                }
+                if(numberOfPlayers>2){
+                        bombers.add(new Bomber(this, new Geometry(434, 48, 10),3));
+                }
+                if(numberOfPlayers>3){
+                        bombers.add(new Bomber(this, new Geometry(48, 434, 10),3));
+                }
+                   
                 
         }
 
         public void run() throws RemoteException{
                 while(bombers.size() >= 1){
-                        System.out.println(bombers);
+                        //System.out.println(bombers);
                         ExchangeDataWithClient();
                         ArrayList<Action> listOfActions = myInterfaceImpl.getListOfActions();
                         int i = 0;
@@ -67,6 +82,7 @@ public class Board{
                                 i++;
                         }
                         for(Bomb aBomb : bombs){
+                                System.out.println(bombs);
                                 aBomb.tick();
                         }
                         for(Explosion anExplosion : explosions){
@@ -151,8 +167,8 @@ public class Board{
         }
 
         public InterfaceReseauImpl installingConnection(String[] args) throws RemoteException{
-                if(args.length > 0){
-                        Registry registry = LocateRegistry.getRegistry(args[0]);
+                if(args.length > 1){
+                        Registry registry = LocateRegistry.getRegistry(args[1]);
                         registry.rebind("distantServer_02", myInterfaceImpl);
                 }
                 else{
@@ -174,12 +190,11 @@ public class Board{
         }
 
         public void waitingForPlayers(int numberOfPlayers) throws RemoteException{
-                while(bombers.size() < numberOfPlayers){
+                while(this.myInterfaceImpl.getInfoFromClients().size() < numberOfPlayers){
                         if(this.myInterfaceImpl.getInfoFromClients().size() > 0){
                                 if(this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).isCreateNew() == false){
                                         this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).setCreateNew(true);
                                         this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
-                                        this.bombers.add(new Bomber(this, null, 0));
                                 }
                         }
                         try{

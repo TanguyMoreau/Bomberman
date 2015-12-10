@@ -104,7 +104,12 @@ public class Geometry{
         public void updateDirection(){
                 double dX = (position.getX() - oldPosition.getX());
                 double dY = (position.getY() - oldPosition.getY());
-                this.direction = new Coordinates(dX, dY);
+                if(dX==0&&dY==0){
+                        
+                }
+                else{
+                        this.direction = new Coordinates(dX, dY);
+                }
         }
 
         public void repel(Geometry centerOfMass){

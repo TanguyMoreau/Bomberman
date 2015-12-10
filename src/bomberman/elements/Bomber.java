@@ -27,7 +27,7 @@ public class Bomber extends Destructible{
 
         public Bomber(Board board, Geometry body, int healthPoints){
                 super(board, body, healthPoints);
-                this.maxBombs = 1;
+                this.maxBombs = 3;
                 this.plantedBombs = 0;
                 this.blastRadius = 100;
                 this.speed = 1;
@@ -68,7 +68,7 @@ public class Bomber extends Destructible{
         public void plantBomb(){
                 if(getPlantedBombs() < getMaxBombs()){
                         this.plantedBombs = this.plantedBombs + 1;
-                        Coordinates c = new Coordinates(this.getBody().getPosition().getX() -this.getBody().getDirection().getX(), this.getBody().getPosition().getY() -this.getBody().getDirection().getY());
+                        Coordinates c = new Coordinates(this.getBody().getPosition().getX() -2*this.getBody().getDirection().getX(), this.getBody().getPosition().getY() -2*this.getBody().getDirection().getY());
                         Geometry oldBody = new Geometry(c, this.getBody().getRadius());
                         Bomb aBomb = new Bomb(this.getBoard(), this, oldBody);
                         this.getBoard().getBombs().add(aBomb);
@@ -85,9 +85,9 @@ public class Bomber extends Destructible{
                         Geometry centerOfMass = new Geometry(blockingBodies);
                         this.getBody().repel(centerOfMass);
                         if(this.getBody().collideWith(centerOfMass)){
-                                System.out.println("!");
+                                //System.out.println("!");
                                 //this.getBody().setPosition(this.getBody().getOldPosition());
-                                this.move(new Coordinates(-vector.getX() / 8, -vector.getY() / 8));
+                                this.move(new Coordinates(-vector.getX() / 8.0, -vector.getY() / 8.0));
                         }
                 }
 
