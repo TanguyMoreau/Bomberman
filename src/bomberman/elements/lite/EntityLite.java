@@ -13,24 +13,24 @@ import java.io.Serializable;
  *
  * @author grochette
  */
-public class EntityLite implements Serializable{
+public class EntityLite implements Serializable {
 
-        private GeometryLite body;
+    private GeometryLite body;
 
-        public EntityLite(GeometryLite body){
-                this.body = body;
-        }
+    public EntityLite(GeometryLite body) {
+        this.body = body;
+    }
 
-        public GeometryLite getBody(){
-                return body;
-        }
+    public GeometryLite getBody() {
+        return body;
+    }
 
-        public void setBody(GeometryLite body){
-                this.body = body;
-        }
+    public void setBody(GeometryLite body) {
+        this.body = body;
+    }
 
-        @Override
-        public String toString(){
-                return "Entity{" + "body=" + body + '}';
-        }
+    @Override
+    public String toString() {
+        return "Entity{" + "body=" + body + '}';
+    }
 }

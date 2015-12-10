@@ -16,35 +16,35 @@ import java.util.ArrayList;
  *
  * @author tmoreau
  */
-public interface InterfaceReseau extends Remote{
+public interface InterfaceReseau extends Remote {
 
-        public Action ListOfActionsPos(int pos) throws RemoteException;
+    public Action ListOfActionsPos(int pos) throws RemoteException;
 
-        public ArrayList<Action> getListOfActions() throws RemoteException;
+    public ArrayList<Action> getListOfActions() throws RemoteException;
 
-        public void ListOfActionsAdd() throws RemoteException;
+    public void ListOfActionsAdd() throws RemoteException;
 
-        public void setCoordinatesPos(int pos, Action myAction) throws RemoteException;
+    public void setCoordinatesPos(int pos, Action myAction) throws RemoteException;
 
-        public void setDropTheBombPos(int pos, Action myAction) throws RemoteException;
+    public void setDropTheBombPos(int pos, Action myAction) throws RemoteException;
 
-        public ArrayList<EntityLite> getDataBoard() throws RemoteException;
+    public ArrayList<EntityLite> getDataBoard() throws RemoteException;
 
-        public InfoTransmited getInfoFromClientsPos(int pos) throws RemoteException;
+    public InfoTransmited getInfoFromClientsPos(int pos) throws RemoteException;
 
-        public void setInfoFromClientsPos(int pos, InfoTransmited myInfo) throws RemoteException;
+    public void setInfoFromClientsPos(int pos, InfoTransmited myInfo) throws RemoteException;
 
-        public ArrayList<InfoTransmited> getInfoFromClients() throws RemoteException;
+    public ArrayList<InfoTransmited> getInfoFromClients() throws RemoteException;
 
-        public void addNew() throws RemoteException;
+    public void addNew() throws RemoteException;
 
-        public int getActualPosition() throws RemoteException;
+    public int getActualPosition() throws RemoteException;
 
-        public void setCreateNewPos(int pos, boolean aBool) throws RemoteException;
+    public void setCreateNewPos(int pos, boolean aBool) throws RemoteException;
 
-        public void setDataSendPos(int pos, boolean aBool) throws RemoteException;
+    public void setDataSendPos(int pos, boolean aBool) throws RemoteException;
 
-        public void setCoordinatesPos(int pos, Coordinates myCoordinates) throws RemoteException;
+    public void setCoordinatesPos(int pos, Coordinates myCoordinates) throws RemoteException;
 
-        public void setDropTheBombPos(int pos, boolean aBool) throws RemoteException;
+    public void setDropTheBombPos(int pos, boolean aBool) throws RemoteException;
 }

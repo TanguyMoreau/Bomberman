@@ -8,16 +8,16 @@ import java.awt.Image;
  *
  * @author ldebril
  */
-public class BomberX extends EntityX{
+public class BomberX extends EntityX {
 
-        private Coordinates coordinates;
+    private Coordinates coordinates;
 
-        /**
-         * @param body
-         * @param img
-         */
-        public BomberX(GeometryX body, Image img){
-                super(body);
-                this.img = img;
-        }
+    /**
+     * @param body
+     * @param img
+     */
+    public BomberX(GeometryX body, Image img) {
+        super(body);
+        this.img = img;
+    }
 }

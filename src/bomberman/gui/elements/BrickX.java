@@ -9,10 +9,10 @@ import javax.swing.ImageIcon;
  *
  * @author ldebril
  */
-public class BrickX extends EntityX{
+public class BrickX extends EntityX {
 
-        public BrickX(GeometryX body, Image img){
-                super(body);
-                this.img = img;
-        }
+    public BrickX(GeometryX body, Image img) {
+        super(body);
+        this.img = img;
+    }
 }

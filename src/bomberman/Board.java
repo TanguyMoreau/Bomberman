@@ -6,7 +6,6 @@
 package bomberman;
 
 import bomberman.elements.*;
-import bomberman.elements.geometry.Coordinates;
 import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.EntityLite;
 import bomberman.elements.motion.Action;
@@ -19,7 +18,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Random;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,188 +26,188 @@ import java.util.logging.Logger;
  *
  * @author grochette
  */
-public class Board{
+public class Board {
 
-        private ArrayList<Bomber> bombers;
-        private HashSet<Bomb> bombs;
-        private ArrayList<Brick> bricks;
-        private HashSet<Wall> walls;
-        private HashSet<Explosion> explosions;
-        private InterfaceReseauImpl myInterfaceImpl;
-        private final int numberOfPlayers;
+    private ArrayList<Bomber> bombers;
+    private HashSet<Bomb> bombs;
+    private ArrayList<Brick> bricks;
+    private HashSet<Wall> walls;
+    private HashSet<Explosion> explosions;
+    private InterfaceReseauImpl myInterfaceImpl;
+    private final int numberOfPlayers;
 
-        public Board(int numberOfPlayers) throws RemoteException{
-                this.bombers = new ArrayList<>();
-                this.bricks = new ArrayList<>();
-                this.walls = new HashSet<>();
-                this.bombs = new HashSet<>();
-                this.explosions = new HashSet<>();
-                this.myInterfaceImpl = new InterfaceReseauImpl();
-                this.numberOfPlayers=numberOfPlayers;
+    public Board(int numberOfPlayers) throws RemoteException {
+        this.bombers = new ArrayList<>();
+        this.bricks = new ArrayList<>();
+        this.walls = new HashSet<>();
+        this.bombs = new HashSet<>();
+        this.explosions = new HashSet<>();
+        this.myInterfaceImpl = new InterfaceReseauImpl();
+        this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public void build(String bomberFile, String brickFile, String wallFile) {
+        this.bombers = BomberReader.readFile(this, bomberFile);
+        this.bricks = BrickReader.readFile(this, brickFile);
+        this.walls = WallReader.readFile(this, wallFile);
+    }
+
+    public void buildDefault() {
+        walls = WallReader.defaultFile(this);
+        if (numberOfPlayers > 0) {
+            bombers.add(new Bomber(this, new Geometry(48, 48, 10), 3));
+        }
+        if (numberOfPlayers > 1) {
+            bombers.add(new Bomber(this, new Geometry(434, 434, 10), 3));
+        }
+        if (numberOfPlayers > 2) {
+            bombers.add(new Bomber(this, new Geometry(434, 48, 10), 3));
+        }
+        if (numberOfPlayers > 3) {
+            bombers.add(new Bomber(this, new Geometry(48, 434, 10), 3));
         }
 
-        public void build(String bomberFile, String brickFile, String wallFile){
-                this.bombers = BomberReader.readFile(this, bomberFile);
-                this.bricks = BrickReader.readFile(this, brickFile);
-                this.walls = WallReader.readFile(this, wallFile);
-        }
+    }
 
-        public void buildDefault(){
-                walls=WallReader.defaultFile(this);
-                if(numberOfPlayers>0){
-                        bombers.add(new Bomber(this, new Geometry(48, 48, 10),3));
+    public void run() throws RemoteException {
+        while (bombers.size() >= 1) {
+            //System.out.println(bombers);
+            ExchangeDataWithClient();
+            ArrayList<Action> listOfActions = myInterfaceImpl.getListOfActions();
+            int i = 0;
+            for (Bomber aBomber : bombers) {
+                aBomber.act(listOfActions.get(i));
+                i++;
+            }
+            for (Iterator<Bomb> b = bombs.iterator(); b.hasNext();) {
+                Bomb aBomb = b.next();
+                aBomb.tick();
+                if (aBomb.getCountdown() == 0) {
+                    b.remove();
                 }
-                if(numberOfPlayers>1){
-                        bombers.add(new Bomber(this, new Geometry(434, 434, 10),3));
+            }
+            for(Iterator<Explosion> e=explosions.iterator();e.hasNext();){
+                e.next().destroy();
+                e.remove();
+            }
+
+            try {
+                Thread.sleep(150);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public InterfaceReseauImpl getMyInterfaceImpl() {
+        return myInterfaceImpl;
+    }
+
+    public void setMyInterfaceImpl(InterfaceReseauImpl myInterfaceImpl) {
+        this.myInterfaceImpl = myInterfaceImpl;
+    }
+
+    public ArrayList<Bomber> getBombers() {
+        return bombers;
+    }
+
+    public void setBombers(ArrayList<Bomber> bombers) {
+        this.bombers = bombers;
+    }
+
+    public HashSet<Bomb> getBombs() {
+        return bombs;
+    }
+
+    public void setBombs(HashSet<Bomb> bombs) {
+        this.bombs = bombs;
+    }
+
+    public ArrayList<Brick> getBricks() {
+        return bricks;
+    }
+
+    public void setBricks(ArrayList<Brick> bricks) {
+        this.bricks = bricks;
+    }
+
+    public HashSet<Wall> getWalls() {
+        return walls;
+    }
+
+    public void setWalls(HashSet<Wall> walls) {
+        this.walls = walls;
+    }
+
+    public HashSet<Explosion> getExplosions() {
+        return explosions;
+    }
+
+    public void setExplosions(HashSet<Explosion> explosions) {
+        this.explosions = explosions;
+    }
+
+    public ArrayList<EntityLite> createListLite() {
+        ArrayList<EntityLite> l = new ArrayList<>();
+        for (Bomber b : this.bombers) {
+            l.add(b.getBomberLite());
+        }
+        for (Bomb b : this.bombs) {
+            l.add(b.getBombLite());
+        }
+        for (Brick b : this.bricks) {
+            l.add(b.getBrickLite());
+        }
+        for (Explosion e : this.explosions) {
+            l.add(e.getExplosionLite());
+        }
+        for (Wall w : this.walls) {
+            l.add(w.getWallLite());
+        }
+        return l;
+    }
+
+    public InterfaceReseauImpl installingConnection(String[] args) throws RemoteException {
+        if (args.length > 1) {
+            Registry registry = LocateRegistry.getRegistry(args[1]);
+            registry.rebind("distantServer_02", myInterfaceImpl);
+        } else {
+            Registry registry = LocateRegistry.getRegistry();
+            registry.rebind("distantServer_02", myInterfaceImpl);
+        }
+        return myInterfaceImpl;
+    }
+
+    public void ExchangeDataWithClient() throws RemoteException {
+        //System.out.println(this.myInterfaceImpl.getListOfActions());
+        this.myInterfaceImpl.setDataBoard(createListLite());
+        for (int i = 0; i < this.myInterfaceImpl.getInfoFromClients().size(); i++) {
+            if (this.myInterfaceImpl.getInfoFromClientsPos(i).isDataSend() == true) {
+                this.myInterfaceImpl.getListOfActions().set(i, this.myInterfaceImpl.getInfoFromClientsPos(i).getMyAction());
+                this.myInterfaceImpl.getInfoFromClientsPos(i).setDataSend(false);
+            }
+        }
+    }
+
+    public void waitingForPlayers(int numberOfPlayers) throws RemoteException {
+        while (this.myInterfaceImpl.getInfoFromClients().size() < numberOfPlayers) {
+            if (this.myInterfaceImpl.getInfoFromClients().size() > 0) {
+                if (this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).isCreateNew() == false) {
+                    this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).setCreateNew(true);
+                    this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
                 }
-                if(numberOfPlayers>2){
-                        bombers.add(new Bomber(this, new Geometry(434, 48, 10),3));
-                }
-                if(numberOfPlayers>3){
-                        bombers.add(new Bomber(this, new Geometry(48, 434, 10),3));
-                }
-                   
-                
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+    }
 
-        public void run() throws RemoteException{
-                while(bombers.size() >= 1){
-                        //System.out.println(bombers);
-                        ExchangeDataWithClient();
-                        ArrayList<Action> listOfActions = myInterfaceImpl.getListOfActions();
-                        int i = 0;
-                        for(Bomber aBomber : bombers){
-                                aBomber.act(listOfActions.get(i));
-                                i++;
-                        }
-                        for(Bomb aBomb : bombs){
-                                System.out.println(bombs);
-                                aBomb.tick();
-                        }
-                        for(Explosion anExplosion : explosions){
-                                anExplosion.destroy();
-                        }
-
-                        try{
-                                Thread.sleep(150);
-                        }
-                        catch(InterruptedException ex){
-                                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                }
-        }
-
-        public InterfaceReseauImpl getMyInterfaceImpl(){
-                return myInterfaceImpl;
-        }
-
-        public void setMyInterfaceImpl(InterfaceReseauImpl myInterfaceImpl){
-                this.myInterfaceImpl = myInterfaceImpl;
-        }
-
-        public ArrayList<Bomber> getBombers(){
-                return bombers;
-        }
-
-        public void setBombers(ArrayList<Bomber> bombers){
-                this.bombers = bombers;
-        }
-
-        public HashSet<Bomb> getBombs(){
-                return bombs;
-        }
-
-        public void setBombs(HashSet<Bomb> bombs){
-                this.bombs = bombs;
-        }
-
-        public ArrayList<Brick> getBricks(){
-                return bricks;
-        }
-
-        public void setBricks(ArrayList<Brick> bricks){
-                this.bricks = bricks;
-        }
-
-        public HashSet<Wall> getWalls(){
-                return walls;
-        }
-
-        public void setWalls(HashSet<Wall> walls){
-                this.walls = walls;
-        }
-
-        public HashSet<Explosion> getExplosions(){
-                return explosions;
-        }
-
-        public void setExplosions(HashSet<Explosion> explosions){
-                this.explosions = explosions;
-        }
-
-        public ArrayList<EntityLite> createListLite(){
-                ArrayList<EntityLite> l = new ArrayList<>();
-                for(Bomber b : this.bombers){
-                        l.add(b.getBomberLite());
-                }
-                for(Bomb b : this.bombs){
-                        l.add(b.getBombLite());
-                }
-                for(Brick b : this.bricks){
-                        l.add(b.getBrickLite());
-                }
-                for(Explosion e : this.explosions){
-                        l.add(e.getExplosionLite());
-                }
-                for(Wall w : this.walls){
-                        l.add(w.getWallLite());
-                }
-                return l;
-        }
-
-        public InterfaceReseauImpl installingConnection(String[] args) throws RemoteException{
-                if(args.length > 1){
-                        Registry registry = LocateRegistry.getRegistry(args[1]);
-                        registry.rebind("distantServer_02", myInterfaceImpl);
-                }
-                else{
-                        Registry registry = LocateRegistry.getRegistry();
-                        registry.rebind("distantServer_02", myInterfaceImpl);
-                }
-                return myInterfaceImpl;
-        }
-
-        public void ExchangeDataWithClient() throws RemoteException{
-                //System.out.println(this.myInterfaceImpl.getListOfActions());
-                this.myInterfaceImpl.setDataBoard(createListLite());
-                for(int i = 0; i < this.myInterfaceImpl.getInfoFromClients().size(); i++){
-                        if(this.myInterfaceImpl.getInfoFromClientsPos(i).isDataSend() == true){
-                                this.myInterfaceImpl.getListOfActions().set(i, this.myInterfaceImpl.getInfoFromClientsPos(i).getMyAction());
-                                this.myInterfaceImpl.getInfoFromClientsPos(i).setDataSend(false);
-                        }
-                }
-        }
-
-        public void waitingForPlayers(int numberOfPlayers) throws RemoteException{
-                while(this.myInterfaceImpl.getInfoFromClients().size() < numberOfPlayers){
-                        if(this.myInterfaceImpl.getInfoFromClients().size() > 0){
-                                if(this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).isCreateNew() == false){
-                                        this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).setCreateNew(true);
-                                        this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
-                                }
-                        }
-                        try{
-                                Thread.sleep(1000);
-                        }
-                        catch(InterruptedException ex){
-                                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                }
-        }
-
-        @Override
-        public String toString(){
-                return "bombers=" + bombers + "\nbombs=" + bombs + "\nbricks=" + bricks + "\nwalls=" + walls;
-        }
+    @Override
+    public String toString() {
+        return "bombers=" + bombers + "\nbombs=" + bombs + "\nbricks=" + bricks + "\nwalls=" + walls;
+    }
 
 }

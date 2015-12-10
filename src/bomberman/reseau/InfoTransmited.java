@@ -13,42 +13,42 @@ import java.io.Serializable;
  *
  * @author tmoreau
  */
-public class InfoTransmited implements Serializable{
+public class InfoTransmited implements Serializable {
 
-        private boolean dataSend;
-        private boolean createNew;
-        private Action myAction;
+    private boolean dataSend;
+    private boolean createNew;
+    private Action myAction;
 
-        public Action getMyAction(){
-                return myAction;
-        }
+    public Action getMyAction() {
+        return myAction;
+    }
 
-        public void setMyAction(Action myAction){
-                this.myAction = myAction;
-        }
+    public void setMyAction(Action myAction) {
+        this.myAction = myAction;
+    }
 
-        public boolean isCreateNew(){
-                return createNew;
-        }
+    public boolean isCreateNew() {
+        return createNew;
+    }
 
-        public void setCreateNew(boolean createNew){
-                this.createNew = createNew;
-        }
+    public void setCreateNew(boolean createNew) {
+        this.createNew = createNew;
+    }
 
-        public boolean isDataSend(){
-                return dataSend;
-        }
+    public boolean isDataSend() {
+        return dataSend;
+    }
 
-        public void setDataSend(boolean dataSend){
-                this.dataSend = dataSend;
-        }
+    public void setDataSend(boolean dataSend) {
+        this.dataSend = dataSend;
+    }
 
-        public InfoTransmited(){
-                super();
-                this.createNew = true;
-                this.dataSend = true;
-                Coordinates myCoordinates = new Coordinates();
-                this.myAction = new Action(myCoordinates, false);
+    public InfoTransmited() {
+        super();
+        this.createNew = true;
+        this.dataSend = true;
+        Coordinates myCoordinates = new Coordinates();
+        this.myAction = new Action(myCoordinates, false);
 
-        }
+    }
 }

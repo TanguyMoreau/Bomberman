@@ -20,30 +20,28 @@ import java.util.logging.Logger;
  *
  * @author grochette
  */
-public class BomberReader{
+public class BomberReader {
 
-        public static ArrayList<Bomber> readFile(Board board, String filename){
-                ArrayList<Bomber> bombers = new ArrayList<>();
-                try(BufferedReader br = new BufferedReader(new FileReader(filename))){
-                        String line = br.readLine();
-                        while(line != null){
-                                String[] split = line.split(" ");
-                                int x = Integer.parseInt(split[0]);
-                                int y = Integer.parseInt(split[1]);
-                                int radius = Integer.parseInt(split[2]);
-                                int healthPoints = Integer.parseInt(split[3]);
-                                Geometry aBody = new Geometry(x, y, radius);
-                                Bomber aBomber = new Bomber(board, aBody, healthPoints);
-                                bombers.add(aBomber);
-                                line = br.readLine();
-                        }
-                }
-                catch(FileNotFoundException ex){
-                        Logger.getLogger(BomberReader.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                catch(IOException ex){
-                        Logger.getLogger(BomberReader.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                return bombers;
+    public static ArrayList<Bomber> readFile(Board board, String filename) {
+        ArrayList<Bomber> bombers = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line = br.readLine();
+            while (line != null) {
+                String[] split = line.split(" ");
+                int x = Integer.parseInt(split[0]);
+                int y = Integer.parseInt(split[1]);
+                int radius = Integer.parseInt(split[2]);
+                int healthPoints = Integer.parseInt(split[3]);
+                Geometry aBody = new Geometry(x, y, radius);
+                Bomber aBomber = new Bomber(board, aBody, healthPoints);
+                bombers.add(aBomber);
+                line = br.readLine();
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BomberReader.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BomberReader.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return bombers;
+    }
 }

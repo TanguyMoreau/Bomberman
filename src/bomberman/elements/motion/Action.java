@@ -12,34 +12,34 @@ import java.io.Serializable;
  *
  * @author grochette
  */
-public class Action implements Serializable{
+public class Action implements Serializable {
 
-        private Coordinates coordinates;
-        private boolean dropTheBomb;
+    private Coordinates coordinates;
+    private boolean dropTheBomb;
 
-        public Action(Coordinates coordinates, boolean dropTheBomb){
-                this.coordinates = coordinates;
-                this.dropTheBomb = dropTheBomb;
-        }
+    public Action(Coordinates coordinates, boolean dropTheBomb) {
+        this.coordinates = coordinates;
+        this.dropTheBomb = dropTheBomb;
+    }
 
-        public Coordinates getCoordinates(){
-                return coordinates;
-        }
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
 
-        public void setCoordinates(Coordinates coordinates){
-                this.coordinates = coordinates;
-        }
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
 
-        public boolean isDropTheBomb(){
-                return dropTheBomb;
-        }
+    public boolean isDropTheBomb() {
+        return dropTheBomb;
+    }
 
-        public void setDropTheBomb(boolean dropTheBomb){
-                this.dropTheBomb = dropTheBomb;
-        }
+    public void setDropTheBomb(boolean dropTheBomb) {
+        this.dropTheBomb = dropTheBomb;
+    }
 
-        @Override
-        public String toString(){
-                return "Action{" + "coordinates=" + coordinates + ", dropTheBomb=" + dropTheBomb + '}';
-        }
+    @Override
+    public String toString() {
+        return "Action{" + "coordinates=" + coordinates + ", dropTheBomb=" + dropTheBomb + '}';
+    }
 }

@@ -15,32 +15,31 @@ import java.util.logging.Logger;
  *
  * @author grochette
  */
-public class Bomberman{
+public class Bomberman {
 
-        /**
-         * @param args the command line arguments
-         */
-        public static void main(String[] args){
-                try{
-                        int numberOfPlayers = Integer.parseInt(args[0]);
-                        Board board = new Board(numberOfPlayers);
-                        
-                        System.out.println("Veuillez connecter "+numberOfPlayers+" client(s)");
-                        board.setMyInterfaceImpl(board.installingConnection(args));
-                        board.waitingForPlayers(numberOfPlayers);
-                        //System.out.println(board.getBombers());
-                        board.buildDefault();
-                        System.out.println(board);
-                        //System.out.println(board.getWalls());
-                        //Bomber a = new Bomber(board, , 3);
-                        //Bomber b = new Bomber(board, new Geometry(0, 1, 0.3), 3);
-                        //board.getBombers().add(a);
-                        //board.getBombers().add(b);
-                        board.run();
-                }
-                catch(RemoteException ex){
-                        Logger.getLogger(Bomberman.class.getName()).log(Level.SEVERE, null, ex);
-                }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        try {
+            int numberOfPlayers = Integer.parseInt(args[0]);
+            Board board = new Board(numberOfPlayers);
+
+            System.out.println("Veuillez connecter " + numberOfPlayers + " client(s)");
+            board.setMyInterfaceImpl(board.installingConnection(args));
+            board.waitingForPlayers(numberOfPlayers);
+            //System.out.println(board.getBombers());
+            board.buildDefault();
+            System.out.println(board);
+            //System.out.println(board.getWalls());
+            //Bomber a = new Bomber(board, , 3);
+            //Bomber b = new Bomber(board, new Geometry(0, 1, 0.3), 3);
+            //board.getBombers().add(a);
+            //board.getBombers().add(b);
+            board.run();
+        } catch (RemoteException ex) {
+            Logger.getLogger(Bomberman.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
 }

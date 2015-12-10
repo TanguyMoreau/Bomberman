@@ -12,34 +12,34 @@ import java.util.Objects;
 /**
  * @author grochette
  */
-public abstract class Entity{
+public abstract class Entity {
 
-        private Board board;
-        private Geometry body;
+    private Board board;
+    private Geometry body;
 
-        public Entity(Board board, Geometry body){
-                this.board = board;
-                this.body = body;
-        }
+    public Entity(Board board, Geometry body) {
+        this.board = board;
+        this.body = body;
+    }
 
-        public Board getBoard(){
-                return board;
-        }
+    public Board getBoard() {
+        return board;
+    }
 
-        public void setBoard(Board board){
-                this.board = board;
-        }
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 
-        public Geometry getBody(){
-                return body;
-        }
+    public Geometry getBody() {
+        return body;
+    }
 
-        public void setBody(Geometry body){
-                this.body = body;
-        }
+    public void setBody(Geometry body) {
+        this.body = body;
+    }
 
-        @Override
-        public String toString(){
-                return "body=" + body;
-        }
+    @Override
+    public String toString() {
+        return "body=" + body;
+    }
 }

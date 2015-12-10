@@ -7,14 +7,14 @@ import java.awt.Image;
  *
  * @author ldebril
  */
-public class BombX extends EntityX{
+public class BombX extends EntityX {
 
-        /**
-         * @param body
-         * @param img
-         */
-        public BombX(GeometryX body, Image img){
-                super(body);
-                this.img = img;
-        }
+    /**
+     * @param body
+     * @param img
+     */
+    public BombX(GeometryX body, Image img) {
+        super(body);
+        this.img = img;
+    }
 }

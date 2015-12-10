@@ -13,19 +13,19 @@ import bomberman.elements.lite.BrickLite;
  *
  * @author grochette
  */
-public class Brick extends Destructible{
+public class Brick extends Destructible {
 
-        public Brick(Board board, Geometry body){
-                super(board, body, 1);
-        }
+    public Brick(Board board, Geometry body) {
+        super(board, body, 1);
+    }
 
-        @Override
-        public void die(){
-                this.getBoard().getBricks().remove(this);
-        }
+    @Override
+    public void die() {
+        this.getBoard().getBricks().remove(this);
+    }
 
-        public BrickLite getBrickLite(){
-                return new BrickLite(this.getBody().getGeometryLite(), this.getHealthPoints());
-        }
+    public BrickLite getBrickLite() {
+        return new BrickLite(this.getBody().getGeometryLite(), this.getHealthPoints());
+    }
 
 }

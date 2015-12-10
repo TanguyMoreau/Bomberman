@@ -12,10 +12,10 @@ import java.io.Serializable;
  *
  * @author grochette
  */
-public class BombLite extends IndestructibleLite implements Serializable{
+public class BombLite extends IndestructibleLite implements Serializable {
 
-        public BombLite(GeometryLite body){
-                super(body);
-        }
+    public BombLite(GeometryLite body) {
+        super(body);
+    }
 
 }

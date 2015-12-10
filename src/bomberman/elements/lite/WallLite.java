@@ -13,10 +13,10 @@ import java.io.Serializable;
  *
  * @author grochette
  */
-public class WallLite extends IndestructibleLite implements Serializable{
+public class WallLite extends IndestructibleLite implements Serializable {
 
-        public WallLite(GeometryLite body){
-                super(body);
-        }
+    public WallLite(GeometryLite body) {
+        super(body);
+    }
 
 }

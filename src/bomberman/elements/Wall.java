@@ -13,14 +13,14 @@ import bomberman.elements.lite.WallLite;
  *
  * @author grochette
  */
-public class Wall extends Indestructible{
+public class Wall extends Indestructible {
 
-        public Wall(Board board, Geometry body){
-                super(board, body);
-        }
+    public Wall(Board board, Geometry body) {
+        super(board, body);
+    }
 
-        public WallLite getWallLite(){
-                return new WallLite(this.getBody().getGeometryLite());
-        }
+    public WallLite getWallLite() {
+        return new WallLite(this.getBody().getGeometryLite());
+    }
 
 }

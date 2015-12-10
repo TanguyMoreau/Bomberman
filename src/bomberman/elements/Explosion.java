@@ -8,33 +8,41 @@ package bomberman.elements;
 import bomberman.Board;
 import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.ExplosionLite;
+import java.util.Iterator;
 
 /**
  *
  * @author grochette
  */
-public class Explosion extends Indestructible{
+public class Explosion extends Indestructible {
 
-        public Explosion(Board board, Geometry body){
-                super(board, body);
-        }
+    public Explosion(Board board, Geometry body) {
+        super(board, body);
+    }
 
-        public void destroy(){
-                for(Bomber aBomber : this.getBoard().getBombers()){
-                        if(this.getBody().isInBall(aBomber.getBody())){
-                                aBomber.loseHealth();
-                        }
-                }
-                for(Brick aBrick : this.getBoard().getBricks()){
-                        if(this.getBody().isInBall(aBrick.getBody())){
-                                aBrick.loseHealth();
-                        }
-                }
-                this.getBoard().getExplosions().remove(this);
+    public void destroy() {
+        for(Iterator<Bomber> i=this.getBoard().getBombers().iterator();i.hasNext();){
+            Bomber aBomber=i.next();
+            if (this.getBody().isInBall(aBomber.getBody())) {
+                aBomber.loseHealth();
+            }
+            if(aBomber.getHealthPoints()==0){
+                i.remove();
+            }
         }
+        for(Iterator<Brick> i=this.getBoard().getBricks().iterator();i.hasNext();){
+            Brick aBrick=i.next();
+            if (this.getBody().isInBall(aBrick.getBody())) {
+                aBrick.loseHealth();
+            }
+            if(aBrick.getHealthPoints()==0){
+                i.remove();
+            }
+        }
+    }
 
-        public ExplosionLite getExplosionLite(){
-                return new ExplosionLite(this.getBody().getGeometryLite());
-        }
+    public ExplosionLite getExplosionLite() {
+        return new ExplosionLite(this.getBody().getGeometryLite());
+    }
 
 }
