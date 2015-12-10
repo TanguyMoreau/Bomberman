@@ -7,11 +7,16 @@ package bomberman;
 
 import bomberman.elements.*;
 import bomberman.elements.geometry.Coordinates;
+import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.EntityLite;
 import bomberman.elements.motion.Action;
+import bomberman.reseau.InterfaceReseauImpl;
 import bomberman.utils.BomberReader;
 import bomberman.utils.BrickReader;
 import bomberman.utils.WallReader;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -29,14 +34,15 @@ public class Board{
         private ArrayList<Brick> bricks;
         private HashSet<Wall> walls;
         private HashSet<Explosion> explosions;
-        private Random r = new Random();
+        private InterfaceReseauImpl myInterfaceImpl;
 
-        public Board(){
+        public Board() throws RemoteException{
                 this.bombers = new ArrayList<>();
                 this.bricks = new ArrayList<>();
                 this.walls = new HashSet<>();
                 this.bombs = new HashSet<>();
                 this.explosions = new HashSet<>();
+                this.myInterfaceImpl = new InterfaceReseauImpl();
         }
 
         public void build(String bomberFile, String brickFile, String wallFile){
@@ -46,16 +52,19 @@ public class Board{
         }
 
         public void buildDefault(){
-                //
+                walls=WallReader.defaultFile(this);
+                
         }
 
-        public void run(){
+        public void run() throws RemoteException{
                 while(bombers.size() >= 1){
-
-                        System.out.println(this.bombers);
-
+                        System.out.println(bombers);
+                        ExchangeDataWithClient();
+                        ArrayList<Action> listOfActions = myInterfaceImpl.getListOfActions();
+                        int i = 0;
                         for(Bomber aBomber : bombers){
-                                aBomber.act(new Action(new Coordinates(3*(1 - 2 *r.nextDouble()),3*(1 - 2 * r.nextDouble())), false));
+                                aBomber.act(listOfActions.get(i));
+                                i++;
                         }
                         for(Bomb aBomb : bombs){
                                 aBomb.tick();
@@ -65,12 +74,20 @@ public class Board{
                         }
 
                         try{
-                                Thread.sleep(1000);
+                                Thread.sleep(150);
                         }
                         catch(InterruptedException ex){
                                 Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
                         }
                 }
+        }
+
+        public InterfaceReseauImpl getMyInterfaceImpl(){
+                return myInterfaceImpl;
+        }
+
+        public void setMyInterfaceImpl(InterfaceReseauImpl myInterfaceImpl){
+                this.myInterfaceImpl = myInterfaceImpl;
         }
 
         public ArrayList<Bomber> getBombers(){
@@ -131,6 +148,47 @@ public class Board{
                         l.add(w.getWallLite());
                 }
                 return l;
+        }
+
+        public InterfaceReseauImpl installingConnection(String[] args) throws RemoteException{
+                if(args.length > 0){
+                        Registry registry = LocateRegistry.getRegistry(args[0]);
+                        registry.rebind("distantServer_02", myInterfaceImpl);
+                }
+                else{
+                        Registry registry = LocateRegistry.getRegistry();
+                        registry.rebind("distantServer_02", myInterfaceImpl);
+                }
+                return myInterfaceImpl;
+        }
+
+        public void ExchangeDataWithClient() throws RemoteException{
+                //System.out.println(this.myInterfaceImpl.getListOfActions());
+                this.myInterfaceImpl.setDataBoard(createListLite());
+                for(int i = 0; i < this.myInterfaceImpl.getInfoFromClients().size(); i++){
+                        if(this.myInterfaceImpl.getInfoFromClientsPos(i).isDataSend() == true){
+                                this.myInterfaceImpl.getListOfActions().set(i, this.myInterfaceImpl.getInfoFromClientsPos(i).getMyAction());
+                                this.myInterfaceImpl.getInfoFromClientsPos(i).setDataSend(false);
+                        }
+                }
+        }
+
+        public void waitingForPlayers(int numberOfPlayers) throws RemoteException{
+                while(bombers.size() < numberOfPlayers){
+                        if(this.myInterfaceImpl.getInfoFromClients().size() > 0){
+                                if(this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).isCreateNew() == false){
+                                        this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).setCreateNew(true);
+                                        this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
+                                        this.bombers.add(new Bomber(this, null, 0));
+                                }
+                        }
+                        try{
+                                Thread.sleep(1000);
+                        }
+                        catch(InterruptedException ex){
+                                Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                }
         }
 
         @Override

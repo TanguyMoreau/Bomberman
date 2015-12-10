@@ -11,13 +11,13 @@ import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.BomberLite;
 import bomberman.elements.motion.Action;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
  * @author grochette
  */
 public class Bomber extends Destructible{
-
         private int plantedBombs;
 
         /*bonuses */
@@ -68,21 +68,26 @@ public class Bomber extends Destructible{
         public void plantBomb(){
                 if(getPlantedBombs() < getMaxBombs()){
                         this.plantedBombs = this.plantedBombs + 1;
-                        Bomb aBomb = new Bomb(this.getBoard(), this);
+                        Coordinates c = new Coordinates(this.getBody().getPosition().getX() -this.getBody().getDirection().getX(), this.getBody().getPosition().getY() -this.getBody().getDirection().getY());
+                        Geometry oldBody = new Geometry(c, this.getBody().getRadius());
+                        Bomb aBomb = new Bomb(this.getBoard(), this, oldBody);
                         this.getBoard().getBombs().add(aBomb);
+                        System.out.println(this);
+                        System.out.println(this.getBoard().getBombs());
                 }
         }
 
         public void move(Coordinates vector){
                 this.getBody().updatePosition(vector);
                 ArrayList<Entity> blockingBodies = findBlockingBodies();
-                System.out.println(blockingBodies);
+//            System.out.println(blockingBodies);
                 if(!blockingBodies.isEmpty()){
                         Geometry centerOfMass = new Geometry(blockingBodies);
                         this.getBody().repel(centerOfMass);
                         if(this.getBody().collideWith(centerOfMass)){
-                                this.getBody().setPosition(this.getBody().getOldPosition());
-                                this.move(new Coordinates(vector.getX() / 8, vector.getY() / 8));
+                                System.out.println("!");
+                                //this.getBody().setPosition(this.getBody().getOldPosition());
+                                this.move(new Coordinates(-vector.getX() / 8, -vector.getY() / 8));
                         }
                 }
 
@@ -123,8 +128,10 @@ public class Bomber extends Destructible{
 
         @Override
         public String toString(){
-                return super.toString();
+                return super.toString()+ " plantedBombs=" + plantedBombs + ", maxBombs=" + maxBombs ;
         }
+
+
 
         public BomberLite getBomberLite(){
                 return new BomberLite(this.getBody().getGeometryLite(), this.getHealthPoints());
@@ -135,6 +142,11 @@ public class Bomber extends Destructible{
                 if(action.isDropTheBomb()){
                         this.plantBomb();
                 }
-
+        }
+        
+        public void giveBackBomb(){
+                if(this.plantedBombs>0){
+                        this.plantedBombs--;
+                }
         }
 }

@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author grochette
  */
-public class Action implements  Serializable{
+public class Action implements Serializable{
 
         private Coordinates coordinates;
         private boolean dropTheBomb;
@@ -21,7 +21,7 @@ public class Action implements  Serializable{
                 this.coordinates = coordinates;
                 this.dropTheBomb = dropTheBomb;
         }
-        
+
         public Coordinates getCoordinates(){
                 return coordinates;
         }

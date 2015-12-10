@@ -82,6 +82,7 @@ public class Geometry{
 
         public static double distanceInfinity(Coordinates a, Coordinates b){
                 return Math.max(Math.abs(a.getX() - b.getX()), Math.abs(a.getY() - b.getY()));
+//                return Math.sqrt((a.getX()-b.getX())*(a.getX()-b.getX())+(a.getY()-b.getY())*(a.getY()-b.getY()));
         }
 
         public boolean isInBall(Geometry g){
@@ -112,7 +113,8 @@ public class Geometry{
                 double xBlock = centerOfMass.getPosition().getX();
                 double yBlock = centerOfMass.getPosition().getY();
                 double repelDistance = this.getRadius() + centerOfMass.getRadius() - Geometry.distanceInfinity(this.getPosition(), centerOfMass.getPosition());
-                Coordinates repelVector = new Coordinates(repelDistance/8 * (xBomber - xBlock), repelDistance /8* (yBomber - yBlock));
+                repelDistance = repelDistance / 16.0;
+                Coordinates repelVector = new Coordinates(repelDistance * (xBomber - xBlock), repelDistance * (yBomber - yBlock));
                 this.position.add(repelVector);
         }
 

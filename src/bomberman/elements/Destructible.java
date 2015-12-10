@@ -38,4 +38,12 @@ public abstract class Destructible extends Entity{
                 this.healthPoints = healthPoints;
         }
 
+        @Override
+        public String toString(){
+                return super.toString()+" healthPoints=" + healthPoints ;
+        }
+        
+        
+
+        
 }

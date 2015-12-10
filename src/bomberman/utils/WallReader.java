@@ -44,22 +44,22 @@ public class WallReader{
                 }
                 return walls;
         }
-        
+
         public static HashSet<Wall> defaultFile(Board board){
                 HashSet<Wall> walls = new HashSet<>();
-                int translate=16;
-                int side=32;
-                int max=15;
-                for(int i=0;i<max;i++){
-                        Geometry aBody= new Geometry(translate+i*side, translate, side/2);
-                        walls.add(new Wall(board,new Geometry(translate+i*side, translate, side/2)));
-                        walls.add(new Wall(board, new Geometry(translate, translate+i*side,side/2)));
-                        walls.add(new Wall(board, new Geometry(translate+(max-1)*side, translate+i*side,side/2)));
-                        walls.add(new Wall(board, new Geometry(translate+i*side,translate+(max-1)*side, side/2)));
+                int translate = 16;
+                int side = 32;
+                int max = 15;
+                for(int i = 0; i < max; i++){
+                        Geometry aBody = new Geometry(translate + i * side, translate, side / 2);
+                        walls.add(new Wall(board, new Geometry(translate + i * side, translate, side / 2)));
+                        walls.add(new Wall(board, new Geometry(translate, translate + i * side, side / 2)));
+                        walls.add(new Wall(board, new Geometry(translate + (max - 1) * side, translate + i * side, side / 2)));
+                        walls.add(new Wall(board, new Geometry(translate + i * side, translate + (max - 1) * side, side / 2)));
                 }
-                for(int i=2;i<max-2;i=i+2){
-                        for(int j=2;j<max-2;j=j+2){
-                                walls.add(new Wall(board, new Geometry(translate+i*side,translate+j*side, side/2)));
+                for(int i = 2; i < max - 2; i = i + 2){
+                        for(int j = 2; j < max - 2; j = j + 2){
+                                walls.add(new Wall(board, new Geometry(translate + i * side, translate + j * side, side / 2)));
                         }
                 }
                 return walls;

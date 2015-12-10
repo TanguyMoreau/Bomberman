@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package bomberman.elements.lite.geometry;
+package bomberman.gui.elements.geometry;
 
 import bomberman.elements.geometry.Coordinates;
-import java.io.Serializable;
+import bomberman.elements.lite.geometry.GeometryLite;
 
-/**
- *
- * @author grochette
- */
-public class GeometryLite implements Serializable{
+public class GeometryX{
 
         private Coordinates position;
         private double radius;
@@ -33,23 +24,23 @@ public class GeometryLite implements Serializable{
                 this.radius = radius;
         }
 
-        public GeometryLite(){
+        public GeometryX(){
                 this.position = new Coordinates();
                 this.radius = 0;
         }
 
-        public GeometryLite(double x, double y, double radius){
+        public GeometryX(double x, double y, double radius){
                 this.position = new Coordinates(x, y);
                 this.radius = radius;
         }
 
-        public GeometryLite(Coordinates position, double radius){
+        public GeometryX(Coordinates position, double radius){
                 this.position = position;
                 this.radius = radius;
         }
 
-        @Override
-        public String toString(){
-                return "Geometry{" + "position=" + position + ", radius=" + radius + "}";
+        public GeometryX(GeometryLite geometryLite){
+                this.position = new Coordinates(geometryLite.getPosition().getX(), geometryLite.getPosition().getY());
+                this.radius = geometryLite.getRadius();
         }
 }

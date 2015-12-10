@@ -7,12 +7,13 @@ package bomberman.elements.lite;
 
 import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.geometry.GeometryLite;
+import java.io.Serializable;
 
 /**
  *
  * @author grochette
  */
-public class IndestructibleLite extends EntityLite{
+public class IndestructibleLite extends EntityLite implements Serializable{
 
         public IndestructibleLite(GeometryLite body){
                 super(body);

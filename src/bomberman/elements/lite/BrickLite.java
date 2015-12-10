@@ -6,12 +6,13 @@
 package bomberman.elements.lite;
 
 import bomberman.elements.lite.geometry.GeometryLite;
+import java.io.Serializable;
 
 /**
  *
  * @author grochette
  */
-public class BrickLite extends DestructibleLite{
+public class BrickLite extends DestructibleLite implements Serializable{
 
         public BrickLite(GeometryLite body, int healthPoints){
                 super(body, healthPoints);

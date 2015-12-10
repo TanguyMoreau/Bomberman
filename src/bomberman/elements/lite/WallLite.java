@@ -7,12 +7,13 @@ package bomberman.elements.lite;
 
 import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.geometry.GeometryLite;
+import java.io.Serializable;
 
 /**
  *
  * @author grochette
  */
-public class WallLite extends IndestructibleLite{
+public class WallLite extends IndestructibleLite implements Serializable{
 
         public WallLite(GeometryLite body){
                 super(body);
