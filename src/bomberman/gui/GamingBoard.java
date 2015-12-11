@@ -56,16 +56,16 @@ public class GamingBoard extends Canvas {
         //System.out.println(listLite);
         for (EntityLite entityLite : listLite) {
             if (entityLite.getClass().equals(new BombLite(null).getClass())) {
-                this.entitiesX.add(new BombX(new GeometryX(entityLite.getBody()), this.bombImg));
+                this.entitiesX.add(new BombX(new GeometryX(entityLite.getBody())));
             }
             if (entityLite.getClass().equals(new BomberLite(null, 0).getClass())) {
-                this.entitiesX.add(new BomberX(new GeometryX(entityLite.getBody()), this.bomberImg));
+                this.entitiesX.add(new BomberX(new GeometryX(entityLite.getBody())));
             }
             if (entityLite.getClass().equals(new BrickLite(null, 0).getClass())) {
-                this.entitiesX.add(new BrickX(new GeometryX(entityLite.getBody()), this.brickImg));
+                this.entitiesX.add(new BrickX(new GeometryX(entityLite.getBody())));
             }
             if (entityLite.getClass().equals(new WallLite(null).getClass())) {
-                this.entitiesX.add(new WallX(new GeometryX(entityLite.getBody()), this.wallImg));
+                this.entitiesX.add(new WallX(new GeometryX(entityLite.getBody())));
             }
         }
     }

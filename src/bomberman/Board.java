@@ -92,7 +92,7 @@ public class Board {
             }
 
             try {
-                Thread.sleep(150);
+                Thread.sleep(17);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
             }

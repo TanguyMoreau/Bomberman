@@ -78,6 +78,7 @@ public class Bomber extends Destructible {
     }
 
     public void move(Coordinates vector) {
+        //Geometry somebody=this.getBody();
         this.getBody().updatePosition(vector);
         ArrayList<Entity> blockingBodies = findBlockingBodies();
         System.out.println(blockingBodies);
@@ -87,8 +88,8 @@ public class Bomber extends Destructible {
             this.getBody().repel(centerOfMass);
             if (this.getBody().collideWith(centerOfMass)) {
                 //System.out.println("!");
-                //this.getBody().setPosition(this.getBody().getOldPosition());
-                this.move(new Coordinates(-vector.getX() / 8.0, -vector.getY() / 8.0));
+                this.getBody().setPosition(this.getBody().getOldPosition());
+                //this.move(new Coordinates(-vector.getX() / 8.0, -vector.getY() / 8.0));
             }
         }
 

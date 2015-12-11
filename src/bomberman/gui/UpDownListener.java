@@ -35,11 +35,11 @@ public class UpDownListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                y=y-2;
+                y=y-4;
                 break;
 
             case KeyEvent.VK_DOWN:
-                y=y+2;
+                y=y+4;
                 break;
         }
     }
