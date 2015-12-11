@@ -19,11 +19,6 @@ public class Brick extends Destructible {
         super(board, body, 1);
     }
 
-    @Override
-    public void die() {
-        this.getBoard().getBricks().remove(this);
-    }
-
     public BrickLite getBrickLite() {
         return new BrickLite(this.getBody().getGeometryLite(), this.getHealthPoints());
     }

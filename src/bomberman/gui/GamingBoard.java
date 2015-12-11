@@ -11,20 +11,11 @@ import java.util.ArrayList;
 
 public class GamingBoard extends Canvas {
 
-    private Image wallImg;
-    private Image brickImg;
-    private Image bombImg;
-    private Image bomberImg;
-
     private ArrayList<EntityX> entitiesX;
 
     public GamingBoard() {
         super();
         this.setBackground(Color.DARK_GRAY);
-        wallImg = new ImageIcon("resources/WallImg.png").getImage();
-        brickImg = new ImageIcon("resources/BrickImg.png").getImage();
-        bombImg = new ImageIcon("resources/BombImg.png").getImage();
-        bomberImg = new ImageIcon("resources/BomberImg.png").getImage();
         entitiesX = new ArrayList<>();
     }
 
@@ -45,10 +36,12 @@ public class GamingBoard extends Canvas {
         // TODO Auto-generated method stub
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
+        WallX w=new WallX(null);
         for (EntityX temp : entitiesX) {
-            temp.paint(g2);
+                temp.paint(g2);
+            
         }
-        g2.finalize();
+        //g2.finalize();
     }
 
     public void convertList(ArrayList<EntityLite> listLite) {

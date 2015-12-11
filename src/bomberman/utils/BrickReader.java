@@ -41,4 +41,30 @@ public class BrickReader {
         }
         return bricks;
     }
+    
+    public static ArrayList<Brick> defaultFile(Board board){
+        ArrayList<Brick> bricks = new ArrayList<>();
+        int translate = 16;
+        int starting = 112;
+        int side = 32;
+        int max = 13;
+        int maxJ = 5;
+        for (int i = 1; i < max; i+=2){
+            for (int j=0; j < maxJ;j++){
+                bricks.add(new Brick(board, new Geometry(translate + (i+1) * side, starting + 2*side*j, side / 2)));               
+            }
+        }
+        for (int i = 1;i< max-3;i++){
+                bricks.add(new Brick(board, new Geometry(translate + (i+2) * side, translate + side, side / 2)));   
+                bricks.add(new Brick(board, new Geometry(translate + (i+2) * side, starting + 10*side, side / 2)));
+                bricks.add(new Brick(board, new Geometry(translate + side , translate + (i+2) * side, side / 2)));
+                bricks.add(new Brick(board, new Geometry(starting + 10*side, translate + (i+2) * side, side / 2)));
+        }
+        for (int i = 2; i < max-2; i+=2){
+            for (int j=0; j < maxJ+1;j++){
+                bricks.add(new Brick(board, new Geometry(translate + (i+1) * side, starting - side + 2*side*j, side / 2)));
+            }
+        }
+        return bricks;
+    }
 }

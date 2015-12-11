@@ -69,9 +69,7 @@ public class Bomber extends Destructible {
     public void plantBomb() {
         if (getPlantedBombs() < getMaxBombs()) {
             this.plantedBombs = this.plantedBombs + 1;
-            Coordinates c = new Coordinates(this.getBody().getPosition().getX() - 2 * this.getBody().getDirection().getX(), this.getBody().getPosition().getY() - 2 * this.getBody().getDirection().getY());
-            Geometry oldBody = new Geometry(c, this.getBody().getRadius());
-            Bomb aBomb = new Bomb(this.getBoard(), this, oldBody);
+            Bomb aBomb = new Bomb(this.getBoard(), this);
             //resoudre collision de la bombe
             this.getBoard().getBombs().add(aBomb);
         }
@@ -80,53 +78,10 @@ public class Bomber extends Destructible {
     public void move(Coordinates vector) {
         //Geometry somebody=this.getBody();
         this.getBody().updatePosition(vector);
-        ArrayList<Entity> blockingBodies = findBlockingBodies();
-        System.out.println(blockingBodies);
-        if (!blockingBodies.isEmpty()) {
-            Geometry centerOfMass = new Geometry(blockingBodies);
-            System.out.println(centerOfMass);
-            this.getBody().repel(centerOfMass);
-            if (this.getBody().collideWith(centerOfMass)) {
-                //System.out.println("!");
-                this.getBody().setPosition(this.getBody().getOldPosition());
-                //this.move(new Coordinates(-vector.getX() / 8.0, -vector.getY() / 8.0));
-            }
-        }
+        this.getBody().correctPosition(this.getBoard());
 
     }
 
-    private ArrayList<Entity> findBlockingBodies() {
-        Geometry bomberBody = this.getBody();
-        ArrayList<Entity> blockingBodies = new ArrayList<>();
-        for (Wall aWall : this.getBoard().getWalls()) {
-            if (bomberBody.collideWith(aWall.getBody())) {
-                blockingBodies.add(aWall);
-            }
-        }
-        for (Brick aBrick : this.getBoard().getBricks()) {
-            if (bomberBody.collideWith(aBrick.getBody())) {
-                blockingBodies.add(aBrick);
-            }
-        }
-        for (Bomber aBomber : this.getBoard().getBombers()) {
-            if (!this.equals(aBomber)) {
-                if (bomberBody.collideWith(aBomber.getBody())) {
-                    blockingBodies.add(aBomber);
-                }
-            }
-        }
-        for (Bomb aBomb : this.getBoard().getBombs()) {
-            if (bomberBody.collideWith(aBomb.getBody())) {
-                blockingBodies.add(aBomb);
-            }
-        }
-        return blockingBodies;
-    }
-
-    @Override
-    public void die() {
-        this.getBoard().getBombers().remove(this);
-    }
 
     @Override
     public String toString() {

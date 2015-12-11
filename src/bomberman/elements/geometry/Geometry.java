@@ -5,7 +5,12 @@
  */
 package bomberman.elements.geometry;
 
+import bomberman.Board;
+import bomberman.elements.Bomb;
+import bomberman.elements.Bomber;
+import bomberman.elements.Brick;
 import bomberman.elements.Entity;
+import bomberman.elements.Wall;
 import bomberman.elements.lite.geometry.GeometryLite;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -110,6 +115,49 @@ public class Geometry {
             this.direction = new Coordinates(dX, dY);
         }
     }
+    
+    public void correctPosition(Board board){
+        ArrayList<Entity> blockingBodies = findBlockingBodies(board);
+        System.out.println(blockingBodies);
+        if (!blockingBodies.isEmpty()) {
+            Geometry centerOfMass = new Geometry(blockingBodies);
+            this.repel(centerOfMass);
+            if (this.collideWith(centerOfMass)) {
+                //System.out.println("!");
+                this.setPosition(this.getOldPosition());
+                //this.move(new Coordinates(-vector.getX() / 8.0, -vector.getY() / 8.0));
+            }
+        }
+    }
+    
+    
+    private ArrayList<Entity> findBlockingBodies(Board board) {
+        Geometry bomberBody = this;
+        ArrayList<Entity> blockingBodies = new ArrayList<>();
+        for (Wall aWall : board.getWalls()) {
+            if (bomberBody.collideWith(aWall.getBody())) {
+                blockingBodies.add(aWall);
+            }
+        }
+        for (Brick aBrick : board.getBricks()) {
+            if (bomberBody.collideWith(aBrick.getBody())) {
+                blockingBodies.add(aBrick);
+            }
+        }
+        for (Bomber aBomber : board.getBombers()) {
+            if (!this.equals(aBomber.getBody())) {
+                if (bomberBody.collideWith(aBomber.getBody())) {
+                    blockingBodies.add(aBomber);
+                }
+            }
+        }
+        for (Bomb aBomb : board.getBombs()) {
+            if (bomberBody.collideWith(aBomb.getBody())) {
+                blockingBodies.add(aBomb);
+            }
+        }
+        return blockingBodies;
+    }
 
     public void repel(Geometry centerOfMass) {
         double xBomber = this.getPosition().getX();
@@ -130,5 +178,4 @@ public class Geometry {
     public GeometryLite getGeometryLite() {
         return new GeometryLite(this.position, this.radius);
     }
-
 }

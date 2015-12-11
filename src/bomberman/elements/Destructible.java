@@ -15,21 +15,29 @@ import bomberman.elements.geometry.Geometry;
 public abstract class Destructible extends Entity {
 
     private int healthPoints;
+    private boolean dead;
 
     public Destructible(Board board, Geometry body, int healthPoints) {
         super(board, body);
         this.healthPoints = healthPoints;
+        this.dead=false;
     }
 
     public void loseHealth() {
         this.healthPoints--;
         if (this.healthPoints == 0) {
-            this.die();
+            this.dead=true;
         }
     }
 
-    public abstract void die();
+    public boolean isDead() {
+        return dead;
+    }
 
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+    
     public int getHealthPoints() {
         return healthPoints;
     }

@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 public class BrickX extends EntityX {
 
-    private static Image img=new ImageIcon("resources/BombImg.png").getImage();
+    private static Image img=new ImageIcon("resources/BrickImg.png").getImage();
     
     public BrickX(GeometryX body) {
         super(body);

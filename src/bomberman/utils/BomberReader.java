@@ -44,4 +44,21 @@ public class BomberReader {
         }
         return bombers;
     }
+    
+    public static ArrayList<Bomber> defaultFile(Board board, int numberOfPlayers){
+        ArrayList<Bomber> bombers = new ArrayList<>();
+        if (numberOfPlayers > 0) {
+            bombers.add(new Bomber(board, new Geometry(48, 48, 10), 3));
+        }
+        if (numberOfPlayers > 1) {
+            bombers.add(new Bomber(board, new Geometry(434, 434, 10), 3));
+        }
+        if (numberOfPlayers > 2) {
+            bombers.add(new Bomber(board, new Geometry(434, 48, 10), 3));
+        }
+        if (numberOfPlayers > 3) {
+            bombers.add(new Bomber(board, new Geometry(48, 434, 10), 3));
+        }
+        return bombers;
+    }
 }

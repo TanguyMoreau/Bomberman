@@ -41,7 +41,7 @@ public class InterfaceReseauImpl extends UnicastRemoteObject implements Interfac
         return actualPosition;
     }
 
-    public void setActualPosition(int actualPosition) {
+    public void setActualPosition(int actualPosition) throws RemoteException {
         this.actualPosition = actualPosition;
     }
 

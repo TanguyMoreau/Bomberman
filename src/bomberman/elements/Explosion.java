@@ -26,17 +26,11 @@ public class Explosion extends Indestructible {
             if (this.getBody().isInBall(aBomber.getBody())) {
                 aBomber.loseHealth();
             }
-            if(aBomber.getHealthPoints()==0){
-                i.remove();
-            }
         }
         for(Iterator<Brick> i=this.getBoard().getBricks().iterator();i.hasNext();){
             Brick aBrick=i.next();
             if (this.getBody().isInBall(aBrick.getBody())) {
                 aBrick.loseHealth();
-            }
-            if(aBrick.getHealthPoints()==0){
-                i.remove();
             }
         }
     }

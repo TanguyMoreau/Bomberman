@@ -54,49 +54,47 @@ public class Board {
 
     public void buildDefault() {
         walls = WallReader.defaultFile(this);
-        if (numberOfPlayers > 0) {
-            bombers.add(new Bomber(this, new Geometry(48, 48, 10), 3));
-        }
-        if (numberOfPlayers > 1) {
-            bombers.add(new Bomber(this, new Geometry(434, 434, 10), 3));
-        }
-        if (numberOfPlayers > 2) {
-            bombers.add(new Bomber(this, new Geometry(434, 48, 10), 3));
-        }
-        if (numberOfPlayers > 3) {
-            bombers.add(new Bomber(this, new Geometry(48, 434, 10), 3));
-        }
-
+        bombers=BomberReader.defaultFile(this, numberOfPlayers);
+        bricks=BrickReader.defaultFile(this);
     }
 
     public void run() throws RemoteException {
-        while (bombers.size() >= 1) {
-            //System.out.println(bombers);
+        while (!bombers.isEmpty()) {
             ExchangeDataWithClient();
             ArrayList<Action> listOfActions = myInterfaceImpl.getListOfActions();
-            int i = 0;
+            int j = 0;
             for (Bomber aBomber : bombers) {
-                aBomber.act(listOfActions.get(i));
-                i++;
+                aBomber.act(listOfActions.get(j));
+                j++;
             }
-            for (Iterator<Bomb> b = bombs.iterator(); b.hasNext();) {
-                Bomb aBomb = b.next();
+            for (Iterator<Bomb> i = bombs.iterator(); i.hasNext();) {
+                Bomb aBomb = i.next();
                 aBomb.tick();
                 if (aBomb.getCountdown() == 0) {
-                    b.remove();
+                    i.remove();
                 }
             }
-            for(Iterator<Explosion> e=explosions.iterator();e.hasNext();){
-                e.next().destroy();
-                e.remove();
+            for(Iterator<Explosion> i=explosions.iterator();i.hasNext();){
+                i.next().destroy();
+                i.remove();
             }
-
+            for(Iterator<Bomber> i=bombers.iterator();i.hasNext();){
+                if(i.next().isDead()){
+                    i.remove();
+                }
+            }
+            for(Iterator<Brick> i=bricks.iterator();i.hasNext();){
+                if(i.next().isDead()){
+                    i.remove();
+                }
+            }
             try {
                 Thread.sleep(17);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        System.out.println("End.");
     }
 
     public InterfaceReseauImpl getMyInterfaceImpl() {
@@ -194,7 +192,7 @@ public class Board {
             if (this.myInterfaceImpl.getInfoFromClients().size() > 0) {
                 if (this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).isCreateNew() == false) {
                     this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).setCreateNew(true);
-                    this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
+                 //   this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
                 }
             }
             try {

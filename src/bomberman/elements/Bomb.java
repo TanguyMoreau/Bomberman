@@ -19,11 +19,11 @@ public class Bomb extends Indestructible {
     private double blastRadius;
     private Bomber owner;
 
-    public Bomb(Board board, Bomber owner, Geometry body) {
-        super(board, body);
+    public Bomb(Board board, Bomber owner) {
+        super(board, owner.getBody());
         this.blastRadius = owner.getBlastRadius();
         this.owner = owner;
-        this.countdown = 20;
+        this.countdown = 100;
     }
 
     public int getCountdown() {
