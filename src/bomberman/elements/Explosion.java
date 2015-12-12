@@ -16,8 +16,13 @@ import java.util.Iterator;
  */
 public class Explosion extends Indestructible {
 
+    private int countdown;
+    private boolean burst;
+
     public Explosion(Board board, Geometry body) {
         super(board, body);
+        this.countdown=board.getTimeStep()*2;
+        this.burst=false;
     }
 
     public void destroy() {
@@ -33,10 +38,31 @@ public class Explosion extends Indestructible {
                 aBrick.loseHealth();
             }
         }
+        this.burst=true;
     }
 
     public ExplosionLite getExplosionLite() {
         return new ExplosionLite(this.getBody().getGeometryLite());
     }
 
+    public void tick() {
+        this.countdown--;
+
+    }
+
+    public int getCountdown() {
+        return countdown;
+    }
+
+    public void setCountdown(int countdown) {
+        this.countdown = countdown;
+    }
+
+    public boolean isBurst() {
+        return burst;
+    }
+
+    public void setBurst(boolean burst) {
+        this.burst = burst;
+    }
 }

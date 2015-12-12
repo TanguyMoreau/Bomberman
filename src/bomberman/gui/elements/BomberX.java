@@ -23,7 +23,7 @@ public class BomberX extends EntityX {
     public void paint(Graphics g) {
         //super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.drawImage(img, (int) Math.round(body.getPosition().getX()), (int) Math.round(body.getPosition().getY()), this);
+        g2.drawImage(img, (int) Math.round(body.getPosition().getX()-body.getRadius()), (int) Math.round(body.getPosition().getY()-body.getRadius()), this);
         g2.finalize();
     }
 }

@@ -30,7 +30,7 @@ public class Bomber extends Destructible {
         this.maxBombs = 3;
         this.plantedBombs = 0;
         this.blastRadius = 96;
-        this.speed = 1;
+        this.speed = board.getTimeStep()/4.0;
     }
 
     public int getMaxBombs() {
@@ -77,7 +77,8 @@ public class Bomber extends Destructible {
     }
 
     public void move(Coordinates vector) {
-        this.getBody().updatePosition(vector);
+        Coordinates modifiedVector=new Coordinates(vector.getX()*speed, vector.getY()*speed);
+        this.getBody().updatePosition(modifiedVector);
         this.correctPosition();
 
     }

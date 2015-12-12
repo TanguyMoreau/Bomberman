@@ -28,9 +28,4 @@ public abstract class EntityX extends Component {
     /* (non-Javadoc)
      * @see java.awt.Component#toString()
      */
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return ("x = " + body.getPosition().getX() + " y = " + body.getPosition().getY());
-    }
 }

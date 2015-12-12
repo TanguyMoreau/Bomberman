@@ -35,6 +35,9 @@ public class Board {
     private HashSet<Explosion> explosions;
     private InterfaceReseauImpl myInterfaceImpl;
     private final int numberOfPlayers;
+    private int timeStep;
+    private int fPS;
+    private int aSecond;
 
     public Board(int numberOfPlayers) throws RemoteException {
         this.bombers = new ArrayList<>();
@@ -44,6 +47,9 @@ public class Board {
         this.explosions = new HashSet<>();
         this.myInterfaceImpl = new InterfaceReseauImpl();
         this.numberOfPlayers = numberOfPlayers;
+        this.aSecond = 1000;
+        this.fPS = 60;
+        this.timeStep = aSecond / fPS;
     }
 
     public void build(String bomberFile, String brickFile, String wallFile) {
@@ -75,8 +81,14 @@ public class Board {
                 }
             }
             for (Iterator<Explosion> i = explosions.iterator(); i.hasNext();) {
-                i.next().destroy();
-                i.remove();
+                Explosion anExplosion = i.next();
+                if(!anExplosion.isBurst()){
+                    anExplosion.destroy();
+                }
+                anExplosion.tick();
+                if (anExplosion.getCountdown() == 0) {
+                    i.remove();
+                }
             }
             for (Iterator<Bomber> i = bombers.iterator(); i.hasNext();) {
                 if (i.next().isDead()) {
@@ -89,11 +101,35 @@ public class Board {
                 }
             }
             try {
-                Thread.sleep(17);
+                Thread.sleep(timeStep);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public int getaSecond() {
+        return aSecond;
+    }
+
+    public void setaSecond(int aSecond) {
+        this.aSecond = aSecond;
+    }
+
+    public int getfPS() {
+        return fPS;
+    }
+
+    public void setfPS(int fPS) {
+        this.fPS = fPS;
+    }
+
+    public int getTimeStep() {
+        return timeStep;
+    }
+
+    public void setTimeStep(int timeStep) {
+        this.timeStep = timeStep;
     }
 
     public InterfaceReseauImpl getMyInterfaceImpl() {

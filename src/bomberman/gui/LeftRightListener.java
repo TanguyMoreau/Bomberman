@@ -32,11 +32,11 @@ public class LeftRightListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
-                x = x + 4;
+                x = x + 1;
                 break;
 
             case KeyEvent.VK_LEFT:
-                x = x - 4;
+                x = x - 1;
                 break;
         }
     }

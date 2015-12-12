@@ -32,10 +32,9 @@ public class GamingBoard extends JPanel {
         // TODO Auto-generated method stub
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-        WallX w = new WallX(null);
+        //System.out.println(entitiesX);
         for (EntityX temp : entitiesX) {
             temp.paint(g2);
-
         }
         //g2.finalize();
     }
@@ -55,6 +54,9 @@ public class GamingBoard extends JPanel {
             }
             if (entityLite.getClass().equals(new WallLite(null).getClass())) {
                 this.entitiesX.add(new WallX(new GeometryX(entityLite.getBody())));
+            }
+            if (entityLite.getClass().equals(new ExplosionLite(null).getClass())) {
+                this.entitiesX.add(new ExplosionX(new GeometryX(entityLite.getBody())));
             }
         }
     }
