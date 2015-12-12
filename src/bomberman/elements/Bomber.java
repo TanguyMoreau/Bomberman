@@ -29,7 +29,7 @@ public class Bomber extends Destructible {
         super(board, body, healthPoints);
         this.maxBombs = 3;
         this.plantedBombs = 0;
-        this.blastRadius = 100;
+        this.blastRadius = 96;
         this.speed = 1;
     }
 

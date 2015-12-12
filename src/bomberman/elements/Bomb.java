@@ -23,7 +23,7 @@ public class Bomb extends Indestructible {
         super(board, aBody);
         this.blastRadius = owner.getBlastRadius();
         this.owner = owner;
-        this.countdown = 100;
+        this.countdown = 128;
     }
 
     public int getCountdown() {
