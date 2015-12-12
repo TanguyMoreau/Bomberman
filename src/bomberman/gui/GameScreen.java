@@ -34,9 +34,9 @@ public class GameScreen extends JFrame {
  /*Definition du sous-Panel CENTER*/
         this.mainCenter = new GamingBoard();
         main.add(mainCenter, BorderLayout.CENTER);
-        mainCenter.setPreferredSize(new Dimension(510, 510));
-        mainCenter.setMinimumSize(new Dimension(510, 510));
-        mainCenter.setMaximumSize(new Dimension(510, 510));
+        mainCenter.setPreferredSize(new Dimension(480, 480));
+        mainCenter.setMinimumSize(new Dimension(480, 480));
+        mainCenter.setMaximumSize(new Dimension(480, 480));
 
         uDL = new UpDownListener();
         lRL = new LeftRightListener();
