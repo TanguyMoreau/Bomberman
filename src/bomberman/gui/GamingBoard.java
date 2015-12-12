@@ -9,18 +9,14 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
-public class GamingBoard extends Canvas {
+public class GamingBoard extends JPanel {
 
     private ArrayList<EntityX> entitiesX;
 
     public GamingBoard() {
-        super();
+        super(null,true);
         this.setBackground(Color.DARK_GRAY);
         entitiesX = new ArrayList<>();
-    }
-
-    public GamingBoard(GraphicsConfiguration config) {
-        super(config);
     }
 
     public ArrayList<EntityX> getEntities() {

@@ -69,9 +69,11 @@ public class Bomber extends Destructible {
     public void plantBomb() {
         if (getPlantedBombs() < getMaxBombs()) {
             this.plantedBombs = this.plantedBombs + 1;
-            Bomb aBomb = new Bomb(this.getBoard(), this);
-            //resoudre collision de la bombe
+            Geometry bombPosition=new Geometry(this.getBody().getPosition().getX()+2*this.getBody().getDirection().getX(), this.getBody().getPosition().getY()+2*this.getBody().getDirection().getY(), this.getBody().getRadius());
+            bombPosition.correctPosition(this.getBoard());
+            Bomb aBomb = new Bomb(this.getBoard(), this,bombPosition);
             this.getBoard().getBombs().add(aBomb);
+            this.getBody().correctPosition(this.getBoard());
         }
     }
 

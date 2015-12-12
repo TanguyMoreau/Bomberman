@@ -28,15 +28,15 @@ public class GameScreen extends JFrame {
         ImageIcon headerIcon = new ImageIcon("resources/insa_logo.jpeg");
         mainNorth.add(new JLabel(new ImageIcon(headerIcon.getImage().getScaledInstance(200, 50, java.awt.Image.SCALE_SMOOTH))));
 
-        mainNorth.add(new JLabel(" DevTeam:  L.DEBRIL  --  T.MOREAU  --  G.ROCHETTE  "));
+        /*mainNorth.add(new JLabel(" DevTeam:  L.DEBRIL  --  T.MOREAU  --  G.ROCHETTE  "));
         mainNorth.add(new JLabel("Bomberman - INSA edition"));
-
+        */
         /*Definition du sous-Panel CENTER*/
         this.mainCenter = new GamingBoard();
         main.add(mainCenter, BorderLayout.CENTER);
-        mainCenter.setPreferredSize(new Dimension(600, 600));
-        mainCenter.setMinimumSize(new Dimension(480, 480));
-        mainCenter.setMaximumSize(new Dimension(700, 700));
+        mainCenter.setPreferredSize(new Dimension(510, 510));
+        mainCenter.setMinimumSize(new Dimension(510, 510));
+        mainCenter.setMaximumSize(new Dimension(510, 510));
 
         uDL = new UpDownListener();
         lRL = new LeftRightListener();
@@ -47,9 +47,11 @@ public class GameScreen extends JFrame {
         mainCenter.setFocusable(true);
 
         /*Definition du sous-Panel EAST*/
-        this.mainEast = new JPanel(new GridLayout(2, 1));
-        mainEast.add(new JButton("[Module 1]"));
-        mainEast.add(new JButton("[Module 2]"));
+        this.mainEast = new JPanel(new GridLayout(4, 1));
+        mainEast.add(new JButton("DevTeam:"));
+        mainEast.add(new JButton("Laurent DEBRIL"));
+        mainEast.add(new JButton("Tanguy MOREAU"));
+        mainEast.add(new JButton("Guillaume ROCHETTE"));
         main.add(mainEast, BorderLayout.EAST);
 
     }

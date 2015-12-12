@@ -28,14 +28,8 @@ public class Bomberman {
             System.out.println("Veuillez connecter " + numberOfPlayers + " client(s)");
             board.setMyInterfaceImpl(board.installingConnection(args));
             board.waitingForPlayers(numberOfPlayers);
-            //System.out.println(board.getBombers());
             board.buildDefault();
             System.out.println(board);
-            //System.out.println(board.getWalls());
-            //Bomber a = new Bomber(board, , 3);
-            //Bomber b = new Bomber(board, new Geometry(0, 1, 0.3), 3);
-            //board.getBombers().add(a);
-            //board.getBombers().add(b);
             board.run();
         } catch (RemoteException ex) {
             Logger.getLogger(Bomberman.class.getName()).log(Level.SEVERE, null, ex);

@@ -59,7 +59,7 @@ public class Board {
     }
 
     public void run() throws RemoteException {
-        while (!bombers.isEmpty()) {
+        while (/*!bombers.isEmpty()*/true) {
             ExchangeDataWithClient();
             ArrayList<Action> listOfActions = myInterfaceImpl.getListOfActions();
             int j = 0;
@@ -94,7 +94,6 @@ public class Board {
                 Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("End.");
     }
 
     public InterfaceReseauImpl getMyInterfaceImpl() {
