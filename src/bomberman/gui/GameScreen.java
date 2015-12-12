@@ -109,11 +109,4 @@ public class GameScreen extends JFrame {
     public void setsL(SpaceListener sL) {
         this.sL = sL;
     }
-
-    public static void main(String[] args) {
-        GameScreen window = new GameScreen();
-        window.pack();
-        window.requestFocus();
-        window.setVisible(true);
-    }
 }
