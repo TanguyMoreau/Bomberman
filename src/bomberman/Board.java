@@ -6,7 +6,6 @@
 package bomberman;
 
 import bomberman.elements.*;
-import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.EntityLite;
 import bomberman.elements.motion.Action;
 import bomberman.reseau.InterfaceReseauImpl;

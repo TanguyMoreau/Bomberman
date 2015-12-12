@@ -1,6 +1,5 @@
 package bomberman.gui.elements;
 
-import bomberman.elements.geometry.Coordinates;
 import bomberman.gui.elements.geometry.GeometryX;
 import java.awt.Graphics;
 import java.awt.Graphics2D;

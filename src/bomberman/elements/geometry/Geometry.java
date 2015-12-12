@@ -5,12 +5,7 @@
  */
 package bomberman.elements.geometry;
 
-import bomberman.Board;
-import bomberman.elements.Bomb;
-import bomberman.elements.Bomber;
-import bomberman.elements.Brick;
 import bomberman.elements.Entity;
-import bomberman.elements.Wall;
 import bomberman.elements.lite.geometry.GeometryLite;
 import java.util.ArrayList;
 

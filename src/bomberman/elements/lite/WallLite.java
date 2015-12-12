@@ -5,7 +5,6 @@
  */
 package bomberman.elements.lite;
 
-import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.geometry.GeometryLite;
 import java.io.Serializable;
 

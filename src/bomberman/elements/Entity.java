@@ -7,7 +7,6 @@ package bomberman.elements;
 
 import bomberman.Board;
 import bomberman.elements.geometry.Geometry;
-import java.util.Objects;
 
 /**
  * @author grochette

@@ -5,8 +5,6 @@
  */
 package bomberman;
 
-import bomberman.elements.Bomber;
-import bomberman.elements.geometry.Geometry;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
