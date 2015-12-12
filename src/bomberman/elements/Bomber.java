@@ -11,7 +11,6 @@ import bomberman.elements.geometry.Geometry;
 import bomberman.elements.lite.BomberLite;
 import bomberman.elements.motion.Action;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  *
@@ -69,21 +68,60 @@ public class Bomber extends Destructible {
     public void plantBomb() {
         if (getPlantedBombs() < getMaxBombs()) {
             this.plantedBombs = this.plantedBombs + 1;
-            Geometry bombPosition=new Geometry(this.getBody().getPosition().getX()+2*this.getBody().getDirection().getX(), this.getBody().getPosition().getY()+2*this.getBody().getDirection().getY(), this.getBody().getRadius());
-            bombPosition.correctPosition(this.getBoard());
-            Bomb aBomb = new Bomb(this.getBoard(), this,bombPosition);
+            Geometry bombPosition = new Geometry(this.getBody().getPosition().getX(), this.getBody().getPosition().getY(), this.getBody().getRadius());
+            Bomb aBomb = new Bomb(this.getBoard(), this, bombPosition);
+            //Bomb aBomb = new Bomb(this.getBoard(), this);
             this.getBoard().getBombs().add(aBomb);
-            this.getBody().correctPosition(this.getBoard());
+            //this.getBody().correctPosition(this.getBoard());
         }
     }
 
     public void move(Coordinates vector) {
-        //Geometry somebody=this.getBody();
         this.getBody().updatePosition(vector);
-        this.getBody().correctPosition(this.getBoard());
+        this.correctPosition();
 
     }
 
+    public void correctPosition() {
+        ArrayList<Entity> blockingBodies = findBlockingBodies();
+        if (!blockingBodies.isEmpty()) {
+            Geometry centerOfMass = new Geometry(blockingBodies);
+            this.getBody().repel(centerOfMass);
+            if (this.getBody().collideWith(centerOfMass)) {
+                this.getBody().setPosition(this.getBody().getOldPosition());
+            }
+        }
+    }
+
+    private ArrayList<Entity> findBlockingBodies() {
+        Geometry bomberBody = this.getBody();
+        ArrayList<Entity> blockingBodies = new ArrayList<>();
+        for (Wall aWall : this.getBoard().getWalls()) {
+            if (bomberBody.collideWith(aWall.getBody())) {
+                blockingBodies.add(aWall);
+            }
+        }
+        for (Brick aBrick : this.getBoard().getBricks()) {
+            if (bomberBody.collideWith(aBrick.getBody())) {
+                blockingBodies.add(aBrick);
+            }
+        }
+        for (Bomber aBomber : this.getBoard().getBombers()) {
+            if (!this.equals(aBomber)) {
+                if (bomberBody.collideWith(aBomber.getBody())) {
+                    blockingBodies.add(aBomber);
+                }
+            }
+        }
+        for (Bomb aBomb : this.getBoard().getBombs()) {
+            if (!aBomb.getOwner().equals(this)) {
+                if (bomberBody.collideWith(aBomb.getBody())) {
+                    blockingBodies.add(aBomb);
+                }
+            }
+        }
+        return blockingBodies;
+    }
 
     @Override
     public String toString() {

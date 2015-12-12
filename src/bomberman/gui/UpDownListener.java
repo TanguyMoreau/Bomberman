@@ -7,14 +7,12 @@ import java.awt.event.KeyListener;
 
 public class UpDownListener implements KeyListener {
 
-
     private double y;
 
     public UpDownListener() {
         // TODO Auto-generated constructor stub
         super();
-        y=0;
-
+        y = 0;
 
     }
 
@@ -35,11 +33,11 @@ public class UpDownListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                y=y-4;
+                y = y - 4;
                 break;
 
             case KeyEvent.VK_DOWN:
-                y=y+4;
+                y = y + 4;
                 break;
         }
     }

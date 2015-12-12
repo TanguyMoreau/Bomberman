@@ -21,14 +21,14 @@ public class Explosion extends Indestructible {
     }
 
     public void destroy() {
-        for(Iterator<Bomber> i=this.getBoard().getBombers().iterator();i.hasNext();){
-            Bomber aBomber=i.next();
+        for (Iterator<Bomber> i = this.getBoard().getBombers().iterator(); i.hasNext();) {
+            Bomber aBomber = i.next();
             if (this.getBody().isInBall(aBomber.getBody())) {
                 aBomber.loseHealth();
             }
         }
-        for(Iterator<Brick> i=this.getBoard().getBricks().iterator();i.hasNext();){
-            Brick aBrick=i.next();
+        for (Iterator<Brick> i = this.getBoard().getBricks().iterator(); i.hasNext();) {
+            Brick aBrick = i.next();
             if (this.getBody().isInBall(aBrick.getBody())) {
                 aBrick.loseHealth();
             }

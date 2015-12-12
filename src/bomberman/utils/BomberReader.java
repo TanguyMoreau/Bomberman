@@ -44,8 +44,8 @@ public class BomberReader {
         }
         return bombers;
     }
-    
-    public static ArrayList<Bomber> defaultFile(Board board, int numberOfPlayers){
+
+    public static ArrayList<Bomber> defaultFile(Board board, int numberOfPlayers) {
         ArrayList<Bomber> bombers = new ArrayList<>();
         if (numberOfPlayers > 0) {
             bombers.add(new Bomber(board, new Geometry(48, 48, 10), 3));

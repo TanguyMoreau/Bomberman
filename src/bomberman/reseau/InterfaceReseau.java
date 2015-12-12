@@ -39,7 +39,7 @@ public interface InterfaceReseau extends Remote {
     public void addNew() throws RemoteException;
 
     public int getActualPosition() throws RemoteException;
-    
+
     public void setActualPosition(int actualPosition) throws RemoteException;
 
     public void setCreateNewPos(int pos, boolean aBool) throws RemoteException;

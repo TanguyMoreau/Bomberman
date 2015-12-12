@@ -12,7 +12,7 @@ public class SpaceListener implements KeyListener {
     public SpaceListener() {
         // TODO Auto-generated constructor stub
         super();
-        isDropTheBomb=false;
+        isDropTheBomb = false;
 
     }
 
@@ -33,7 +33,7 @@ public class SpaceListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_SPACE:
-                isDropTheBomb=true;
+                isDropTheBomb = true;
                 break;
         }
     }

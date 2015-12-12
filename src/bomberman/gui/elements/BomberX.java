@@ -13,17 +13,17 @@ import javax.swing.ImageIcon;
  */
 public class BomberX extends EntityX {
 
-    private static Image img=new ImageIcon("resources/BomberImg.png").getImage();
+    private static Image img = new ImageIcon("resources/BomberImg.png").getImage();
 
     public BomberX(GeometryX body) {
         super(body);
     }
-    
+
     @Override
     public void paint(Graphics g) {
         //super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(img, (int) Math.round(body.getPosition().getX()), (int) Math.round(body.getPosition().getY()), this);
-        g2.finalize();    
+        g2.finalize();
     }
 }

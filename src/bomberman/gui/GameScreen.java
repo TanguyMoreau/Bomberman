@@ -30,8 +30,8 @@ public class GameScreen extends JFrame {
 
         /*mainNorth.add(new JLabel(" DevTeam:  L.DEBRIL  --  T.MOREAU  --  G.ROCHETTE  "));
         mainNorth.add(new JLabel("Bomberman - INSA edition"));
-        */
-        /*Definition du sous-Panel CENTER*/
+         */
+ /*Definition du sous-Panel CENTER*/
         this.mainCenter = new GamingBoard();
         main.add(mainCenter, BorderLayout.CENTER);
         mainCenter.setPreferredSize(new Dimension(510, 510));

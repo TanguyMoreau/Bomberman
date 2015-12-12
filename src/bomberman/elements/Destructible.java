@@ -20,13 +20,13 @@ public abstract class Destructible extends Entity {
     public Destructible(Board board, Geometry body, int healthPoints) {
         super(board, body);
         this.healthPoints = healthPoints;
-        this.dead=false;
+        this.dead = false;
     }
 
     public void loseHealth() {
         this.healthPoints--;
         if (this.healthPoints == 0) {
-            this.dead=true;
+            this.dead = true;
         }
     }
 
@@ -37,7 +37,7 @@ public abstract class Destructible extends Entity {
     public void setDead(boolean dead) {
         this.dead = dead;
     }
-    
+
     public int getHealthPoints() {
         return healthPoints;
     }

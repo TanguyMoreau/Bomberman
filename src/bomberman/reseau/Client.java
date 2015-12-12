@@ -65,7 +65,7 @@ public class Client {
         myInterface.addNew();
         myInterface.ListOfActionsAdd();
         this.position = myInterface.getActualPosition();
-        myInterface.setActualPosition(this.position+1);
+        myInterface.setActualPosition(this.position + 1);
         myInterface.setCreateNewPos(position, false);
     }
 

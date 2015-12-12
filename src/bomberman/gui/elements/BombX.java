@@ -12,8 +12,8 @@ import javax.swing.ImageIcon;
  */
 public class BombX extends EntityX {
 
-    private static Image img=new ImageIcon("resources/BombImg.png").getImage();
-    
+    private static Image img = new ImageIcon("resources/BombImg.png").getImage();
+
     public BombX(GeometryX body) {
         super(body);
     }
@@ -23,7 +23,7 @@ public class BombX extends EntityX {
         //super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(img, (int) Math.round(body.getPosition().getX()), (int) Math.round(body.getPosition().getY()), this);
-        g2.finalize();    
+        g2.finalize();
     }
-    
+
 }

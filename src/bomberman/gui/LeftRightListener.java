@@ -12,7 +12,7 @@ public class LeftRightListener implements KeyListener {
     public LeftRightListener() {
         // TODO Auto-generated constructor stub
         super();
-        x=0;
+        x = 0;
     }
 
     public double getX() {
@@ -32,11 +32,11 @@ public class LeftRightListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
-                x=x+4;
+                x = x + 4;
                 break;
 
             case KeyEvent.VK_LEFT:
-                x=x-4;
+                x = x - 4;
                 break;
         }
     }

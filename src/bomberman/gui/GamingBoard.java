@@ -14,7 +14,7 @@ public class GamingBoard extends JPanel {
     private ArrayList<EntityX> entitiesX;
 
     public GamingBoard() {
-        super(null,true);
+        super(null, true);
         this.setBackground(Color.DARK_GRAY);
         entitiesX = new ArrayList<>();
     }
@@ -32,10 +32,10 @@ public class GamingBoard extends JPanel {
         // TODO Auto-generated method stub
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
-        WallX w=new WallX(null);
+        WallX w = new WallX(null);
         for (EntityX temp : entitiesX) {
-                temp.paint(g2);
-            
+            temp.paint(g2);
+
         }
         //g2.finalize();
     }

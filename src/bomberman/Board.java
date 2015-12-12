@@ -54,8 +54,8 @@ public class Board {
 
     public void buildDefault() {
         walls = WallReader.defaultFile(this);
-        bombers=BomberReader.defaultFile(this, numberOfPlayers);
-        bricks=BrickReader.defaultFile(this);
+        bombers = BomberReader.defaultFile(this, numberOfPlayers);
+        bricks = BrickReader.defaultFile(this);
     }
 
     public void run() throws RemoteException {
@@ -74,17 +74,17 @@ public class Board {
                     i.remove();
                 }
             }
-            for(Iterator<Explosion> i=explosions.iterator();i.hasNext();){
+            for (Iterator<Explosion> i = explosions.iterator(); i.hasNext();) {
                 i.next().destroy();
                 i.remove();
             }
-            for(Iterator<Bomber> i=bombers.iterator();i.hasNext();){
-                if(i.next().isDead()){
+            for (Iterator<Bomber> i = bombers.iterator(); i.hasNext();) {
+                if (i.next().isDead()) {
                     i.remove();
                 }
             }
-            for(Iterator<Brick> i=bricks.iterator();i.hasNext();){
-                if(i.next().isDead()){
+            for (Iterator<Brick> i = bricks.iterator(); i.hasNext();) {
+                if (i.next().isDead()) {
                     i.remove();
                 }
             }
@@ -191,7 +191,7 @@ public class Board {
             if (this.myInterfaceImpl.getInfoFromClients().size() > 0) {
                 if (this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).isCreateNew() == false) {
                     this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).setCreateNew(true);
-                 //   this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
+                    //   this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
                 }
             }
             try {

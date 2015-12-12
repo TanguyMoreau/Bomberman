@@ -13,17 +13,17 @@ import javax.swing.ImageIcon;
  */
 public class WallX extends EntityX {
 
-    private static Image img=new ImageIcon("resources/WallImg.png").getImage();
+    private static Image img = new ImageIcon("resources/WallImg.png").getImage();
 
     public WallX(GeometryX body) {
         super(body);
     }
-    
+
     @Override
     public void paint(Graphics g) {
         //super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.drawImage(img, (int) Math.round(body.getPosition().getX()), (int) Math.round(body.getPosition().getY()), this);
-        g2.finalize();    
+        g2.finalize();
     }
 }
