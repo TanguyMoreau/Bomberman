@@ -30,7 +30,7 @@ public class Bomber extends Destructible {
         this.maxBombs = 3;
         this.plantedBombs = 0;
         this.blastRadius = 96;
-        this.speed = board.getTimeStep()/3.0;
+        this.speed = board.getTimeStep()/4.0;
     }
 
     public int getMaxBombs() {

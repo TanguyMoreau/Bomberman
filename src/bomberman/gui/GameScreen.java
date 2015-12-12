@@ -3,15 +3,14 @@ package bomberman.gui;
 import java.awt.*;
 import javax.swing.*;
 
-import javax.accessibility.AccessibleContext;
-
 public class GameScreen extends JFrame {
 
     private JPanel main, mainNorth, mainEast;
     private GamingBoard mainCenter;
-    private UpDownListener uDL;
-    private LeftRightListener lRL;
-    private SpaceListener sL;
+//    private UpDownListener uDL;
+//    private LeftRightListener lRL;
+//    private SpaceListener sL;
+    private MultipleKeysListener mKL;
 
     public GameScreen() {
         super("Bomberman - INSA edition");
@@ -37,13 +36,15 @@ public class GameScreen extends JFrame {
         mainCenter.setPreferredSize(new Dimension(480, 480));
         mainCenter.setMinimumSize(new Dimension(480, 480));
         mainCenter.setMaximumSize(new Dimension(480, 480));
+        mKL=new MultipleKeysListener();
+        mainCenter.addKeyListener(mKL);
 
-        uDL = new UpDownListener();
-        lRL = new LeftRightListener();
-        sL = new SpaceListener();
-        mainCenter.addKeyListener(uDL);
-        mainCenter.addKeyListener(lRL);
-        mainCenter.addKeyListener(sL);
+//        uDL = new UpDownListener();
+//        lRL = new LeftRightListener();
+//        sL = new SpaceListener();
+//        mainCenter.addKeyListener(uDL);
+//        mainCenter.addKeyListener(lRL);
+//        mainCenter.addKeyListener(sL);
         mainCenter.setFocusable(true);
 
         /*Definition du sous-Panel EAST*/
@@ -88,27 +89,11 @@ public class GameScreen extends JFrame {
         this.mainCenter = mainCenter;
     }
 
-    public UpDownListener getuDL() {
-        return uDL;
+    public MultipleKeysListener getmKL() {
+        return mKL;
     }
 
-    public void setuDL(UpDownListener uDL) {
-        this.uDL = uDL;
-    }
-
-    public LeftRightListener getlRL() {
-        return lRL;
-    }
-
-    public void setlRL(LeftRightListener lRL) {
-        this.lRL = lRL;
-    }
-
-    public SpaceListener getsL() {
-        return sL;
-    }
-
-    public void setsL(SpaceListener sL) {
-        this.sL = sL;
+    public void setmKL(MultipleKeysListener mKL) {
+        this.mKL = mKL;
     }
 }

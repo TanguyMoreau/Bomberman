@@ -5,8 +5,8 @@
  */
 package bomberman;
 
-import bomberman.reseau.Client;
 import bomberman.elements.geometry.Coordinates;
+import bomberman.reseau.Client;
 import bomberman.elements.motion.Action;
 import bomberman.gui.GameScreen;
 import java.rmi.NotBoundException;
@@ -45,7 +45,6 @@ public class ClientMain {
         c.getWindow().pack();
         c.getWindow().requestFocus();
         c.getWindow().setVisible(true);
-        Random r = new Random();
         while (true) {
             try {
                 Thread.sleep(1);
@@ -53,11 +52,10 @@ public class ClientMain {
                 Logger.getLogger(ClientMain.class.getName()).log(Level.SEVERE, null, ex);
             }
             if (c.getClient().getMyInterface().getInfoFromClientsPos(c.getClient().getPosition()).isDataSend() == false) {
-                Action newAction = new Action(new Coordinates(c.getWindow().getlRL().getX(), c.getWindow().getuDL().getY()), c.getWindow().getsL().isIsDropTheBomb());
-                c.getWindow().getuDL().setY(0);
-                c.getWindow().getlRL().setX(0);
-                c.getWindow().getsL().setIsDropTheBomb(false);
-
+                Action newAction = new Action(new Coordinates(c.getWindow().getmKL().getX(),c.getWindow().getmKL().getY()),c.getWindow().getmKL().isDropTheBomb());
+                c.getWindow().getmKL().setX(0);
+                c.getWindow().getmKL().setY(0);
+                c.getWindow().getmKL().setDropTheBomb(false);
                 try {
                     c.getClient().sendDataToServer(c.getClient().getMyInterface(), newAction, c.getClient().getPosition());
                 } catch (RemoteException ex) {

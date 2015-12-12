@@ -7,6 +7,7 @@ package bomberman.elements.motion;
 
 import bomberman.elements.geometry.Coordinates;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
