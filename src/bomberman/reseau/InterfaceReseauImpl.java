@@ -10,6 +10,9 @@ import java.util.ArrayList;
 /**
  *
  * @author tmoreau
+ * 
+ * Interface du réseau.
+ * Des accesseurs ont dû être redéfinis ici pour pouvoir être passé en réseau étant Sérializable.
  */
 public class InterfaceReseauImpl extends UnicastRemoteObject implements InterfaceReseau {
 
@@ -21,79 +24,62 @@ public class InterfaceReseauImpl extends UnicastRemoteObject implements Interfac
     private final ArrayList<InfoTransmited> infoFromClients;
     private int actualPosition;
 
+    // Accesseurs
     public ArrayList<EntityLite> getDataBoard() throws RemoteException {
         return dataBoard;
     }
-
     public void setDataBoard(ArrayList<EntityLite> dataBoard) {
         this.dataBoard = dataBoard;
     }
-
     public ArrayList<Action> getListOfActions() {
         return listOfActions;
     }
-
     public void setListOfActions(ArrayList<Action> listOfActions) {
         this.listOfActions = listOfActions;
     }
-
     public int getActualPosition() throws RemoteException {
         return actualPosition;
     }
-
     public void setActualPosition(int actualPosition) throws RemoteException {
         this.actualPosition = actualPosition;
     }
-
     public ArrayList<InfoTransmited> getInfoFromClients() {
         return infoFromClients;
     }
-
     public InfoTransmited getInfoFromClientsPos(int pos) {
         return this.infoFromClients.get(pos);
     }
-
     public void setInfoFromClientsPos(int pos, InfoTransmited myInfo) throws RemoteException {
         this.infoFromClients.set(pos, myInfo);
     }
-
     public void setCoordinatesPos(int pos, Coordinates myCoordinates) throws RemoteException {
         this.infoFromClients.get(pos).getMyAction().setCoordinates(myCoordinates);
     }
-
-    public void setCreateNewPos(int pos, boolean aBool) throws RemoteException {
-        this.infoFromClients.get(pos).setCreateNew(aBool);
-    }
-
     public void setDataSendPos(int pos, boolean aBool) throws RemoteException {
         this.infoFromClients.get(pos).setDataSend(aBool);
     }
-
     public void setDropTheBombPos(int pos, boolean aBool) throws RemoteException {
         this.infoFromClients.get(pos).getMyAction().setDropTheBomb(aBool);
     }
-
     public void ListOfActionsAdd() throws RemoteException {
         this.getListOfActions().add(null);
     }
-
     public Action ListOfActionsPos(int pos) throws RemoteException {
         return listOfActions.get(pos);
     }
-
     public void setCoordinatesPos(int pos, Action myAction) throws RemoteException {
         this.ListOfActionsPos(pos).setCoordinates(myAction.getCoordinates());
     }
-
     public void setDropTheBombPos(int pos, Action myAction) throws RemoteException {
         this.ListOfActionsPos(pos).setDropTheBomb(myAction.isDropTheBomb());
     }
-
     public void addNew() throws RemoteException {
         InfoTransmited newInfoTransmited = new InfoTransmited();
         infoFromClients.add(newInfoTransmited);
     }
 
+    
+    // Constructeur
     public InterfaceReseauImpl() throws RemoteException {
         this.listOfActions = new ArrayList();
         this.infoFromClients = new ArrayList();
