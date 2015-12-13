@@ -211,9 +211,8 @@ public class Board {
     }
 
     public void ExchangeDataWithClient() throws RemoteException {
-        //System.out.println(this.myInterfaceImpl.getListOfActions());
         this.myInterfaceImpl.setDataBoard(createListLite());
-        for (int i = 0; i < this.myInterfaceImpl.getInfoFromClients().size(); i++) {
+        for (int i = 0; i < this.myInterfaceImpl.getInfoFromClients().size(); i++) { // Pour tous les clients, si celui ci a envoyé des informations(Action) on les récupère
             if (this.myInterfaceImpl.getInfoFromClientsPos(i).isDataSend() == true) {
                 this.myInterfaceImpl.getListOfActions().set(i, this.myInterfaceImpl.getInfoFromClientsPos(i).getMyAction());
                 this.myInterfaceImpl.getInfoFromClientsPos(i).setDataSend(false);
@@ -221,16 +220,10 @@ public class Board {
         }
     }
 
-    public void waitingForPlayers(int numberOfPlayers) throws RemoteException {
+    public void waitingForPlayers(int numberOfPlayers) throws RemoteException { // Attend que tous les joueurs se soient connectés au serveur pour lancer la partie
         while (this.myInterfaceImpl.getInfoFromClients().size() < numberOfPlayers) {
-            if (this.myInterfaceImpl.getInfoFromClients().size() > 0) {
-                if (this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).isCreateNew() == false) {
-                    this.myInterfaceImpl.getInfoFromClientsPos(this.myInterfaceImpl.getInfoFromClients().size() - 1).setCreateNew(true);
-                    //   this.myInterfaceImpl.setActualPosition(this.myInterfaceImpl.getActualPosition() + 1);
-                }
-            }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1000); // Pour éviter le stack overflow dans la boucle serveur vide en début de partie
             } catch (InterruptedException ex) {
                 Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
             }
