@@ -42,8 +42,6 @@ public interface InterfaceReseau extends Remote {
 
     public void setActualPosition(int actualPosition) throws RemoteException;
 
-    public void setCreateNewPos(int pos, boolean aBool) throws RemoteException;
-
     public void setDataSendPos(int pos, boolean aBool) throws RemoteException;
 
     public void setCoordinatesPos(int pos, Coordinates myCoordinates) throws RemoteException;
