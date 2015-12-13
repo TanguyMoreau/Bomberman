@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bomberman.reseau;
 
 import bomberman.elements.geometry.Coordinates;
@@ -12,40 +7,31 @@ import java.io.Serializable;
 /**
  *
  * @author tmoreau
+ * 
+ * Cet objet permet de stocker les différentes informations nécessaires à l'echange entre le client et le serveur.
  */
 public class InfoTransmited implements Serializable {
+    
+    private boolean dataSend; // Permet l'échange des informations selon la boucle serveur
+    private Action myAction; // Définit le comportement du client en jeu (ie du bomberman)
 
-    private boolean dataSend;
-    private boolean createNew;
-    private Action myAction;
-
+    // Accesseurs
     public Action getMyAction() {
         return myAction;
     }
-
     public void setMyAction(Action myAction) {
         this.myAction = myAction;
     }
-
-    public boolean isCreateNew() {
-        return createNew;
-    }
-
-    public void setCreateNew(boolean createNew) {
-        this.createNew = createNew;
-    }
-
     public boolean isDataSend() {
         return dataSend;
     }
-
     public void setDataSend(boolean dataSend) {
         this.dataSend = dataSend;
     }
 
+    // Constructeur
     public InfoTransmited() {
         super();
-        this.createNew = true;
         this.dataSend = true;
         Coordinates myCoordinates = new Coordinates();
         this.myAction = new Action(myCoordinates, false);
